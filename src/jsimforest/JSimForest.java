@@ -14,7 +14,6 @@ public class JSimForest {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        System.out.println("hello world");
-        System.out.println("e");
+        Window w = new Window();
     }
 }
