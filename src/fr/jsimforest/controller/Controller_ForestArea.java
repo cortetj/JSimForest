@@ -9,7 +9,7 @@ package fr.jsimforest.controller;
  * @author EggMan
  */
 public class Controller_ForestArea {
-    
+   
         private static int[][] ForestAreaTab;
         private static int width;
         private static int height;
