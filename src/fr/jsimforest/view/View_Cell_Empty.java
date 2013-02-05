@@ -14,6 +14,6 @@ import javax.swing.BorderFactory;
 public class View_Cell_Empty extends View_Cell {
     
     public View_Cell_Empty(int x, int y) {
-        super(x, y, Color.WHITE);
+        super(x, y, Color.decode("#E8D3BE"));
     }
 }

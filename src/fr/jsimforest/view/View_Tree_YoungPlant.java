@@ -17,7 +17,6 @@ public class View_Tree_YoungPlant extends View_Cell implements MouseListener {
     
     public View_Tree_YoungPlant(int x, int y) {    
         super(x, y, Color.decode("#54ff54"));
-        System.out.println(" color : " + this.getColor());
     }
 
 }

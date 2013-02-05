@@ -31,7 +31,7 @@ public class Window_NewForest extends JFrame {
         private JButton Button_ok;
         private JButton Button_cancel;
         
-        private JTextField Text_;
+        private JTextField Text_name;
                 
         private JSpinner Spinner_width;
         private JSpinner Spinner_height;
@@ -49,7 +49,7 @@ public class Window_NewForest extends JFrame {
         
         this.Buttons = new JPanel();
         this.Form = new JPanel();
-        this.Text_ = new JTextField();
+        this.Text_name = new JTextField();
         
         this.Form.setLayout(new BoxLayout(this.Form, BoxLayout.LINE_AXIS));
         this.Form.setPreferredSize(new Dimension(400,100));
@@ -70,7 +70,7 @@ public class Window_NewForest extends JFrame {
         this.Button_ok.addActionListener(new ActionListener() {
           @Override
           public void actionPerformed(ActionEvent evt) {
-                Controller_ForestArea.defautTab(Model_width.getNumber().intValue(), Model_height.getNumber().intValue());
+                Controller_ForestArea.defautTab(Model_width.getNumber().intValue(), Model_height.getNumber().intValue(), Text_name.getText());
                 parent.updateForest();
                 dispose();
           }
@@ -82,7 +82,8 @@ public class Window_NewForest extends JFrame {
                 dispose();
           }
         });
-        
+        this.Form.add(new JLabel("Name"));
+        this.Form.add(this.Text_name);
         this.Form.add(new JLabel("Height"));
         this.Form.add(this.Spinner_height);
         this.Form.add(new JLabel("Width"));

@@ -24,7 +24,7 @@ public class Window extends JFrame{
     private View_ActionMenu Menu_action;
     private View_TreeMenu Menu_tree;
     private View_StatMenu Menu_stat;
-                 
+                     
     public Window() {
         
         this.setTitle("JSimForest");
@@ -34,7 +34,7 @@ public class Window extends JFrame{
         this.getContentPane().setLayout(new BorderLayout());
        
         JPanel forestArea_zone = new JPanel(new BorderLayout());
-        this.forestArea = new View_ForestArea();
+        this.forestArea = new View_ForestArea(this);
         
         JScrollPane scroll = new JScrollPane(this.forestArea);
         scroll.getVerticalScrollBar().setUnitIncrement(16);
@@ -65,5 +65,23 @@ public class Window extends JFrame{
         this.forestArea.updateGrid();
         this.Menu_stat.updateLabelStat();
     }
+
+    /**
+     * @param Window_title the Window_title to set
+     */
+    public void setWindow_title(String Window_title) {
+        //this.Window_title = Window_title;
+        this.setTitle(Window_title);
+    }
+
+    public void forestAreaZoomIn() {
+        this.forestArea.zoomin();
+    }
+
+    public void forestAreaZoomOut() {
+        this.forestArea.zoomout();
+    }
+
+
     
 }

@@ -11,6 +11,9 @@ package fr.jsimforest.controller;
 public class Controller_ForestArea {
    
         private static int[][] ForestAreaTab;
+        
+        private static String name;
+
         private static int width;
         private static int height;
         private static int Nbr_empty;
@@ -27,6 +30,7 @@ public class Controller_ForestArea {
     public Controller_ForestArea() {
 
         this.statut = 1;
+        this.name = "Default Forest";
 
 //        int fo[][] = {{1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 0, 0, 1, 0, 0},
 //                  {1, 3, 2, 2, 2, 0, 1, 0, 0, 1, 0, 0, 3, 0, 0, 1, 3, 0},
@@ -49,10 +53,10 @@ public class Controller_ForestArea {
 //                  {1, 0, 0, 2, 2, 0, 1, 0, 0, 1, 0, 0, 3, 0, 0, 0, 3, 0},
 //                  {0, 1, 1, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 3, 0, 1}};
         
-        int fo[][] = new int[20][20];
+        int fo[][] = new int[40][40];
         for(int i=0; i<fo[0].length;i++) {
             for(int j=0; j<fo.length; j++) {
-                fo[i][j] = 0;
+                fo[i][j] = (int)(Math.random() * (4));
             }
         }
         
@@ -60,7 +64,9 @@ public class Controller_ForestArea {
         this.updatePropWithTab();
     }
     
-    public static void defautTab(int width, int height) {
+    public static void defautTab(int width, int height, String name) {
+        
+        Controller_ForestArea.setName(name);
         
         int fo[][] = new int[height][width];
         
@@ -266,6 +272,21 @@ public class Controller_ForestArea {
      */
     public static void setNbr_infect(int aNbr_infect) {
         Nbr_infect = aNbr_infect;
+    }
+
+
+    /**
+     * @return the name
+     */
+    public static String getName() {
+        return name;
+    }
+
+    /**
+     * @param aName the name to set
+     */
+    public static void setName(String aName) {
+        name = aName;
     }
 
     

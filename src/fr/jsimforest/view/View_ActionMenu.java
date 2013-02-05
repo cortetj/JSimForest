@@ -31,6 +31,8 @@ public class View_ActionMenu extends JPanel{
     private JButton Button_pause;
     private JButton Button_nf;
     private JButton Button_fast;
+    private JButton Button_zoomin;
+    private JButton Button_zoomout;
     
     
     public View_ActionMenu(final Window parent) {
@@ -103,6 +105,22 @@ public class View_ActionMenu extends JPanel{
         ImageIcon Ico_fast = new ImageIcon("img/ico_fast.png"); 
         this.Button_fast = new JButton(Ico_fast);
         
+        this.Button_zoomin = new JButton("+");
+        this.Button_zoomin.addActionListener(new ActionListener() {
+          @Override
+          public void actionPerformed(ActionEvent evt) {
+                parent.forestAreaZoomIn();
+          }
+        });
+        
+        this.Button_zoomout = new JButton("-");
+        this.Button_zoomout.addActionListener(new ActionListener() {
+          @Override
+          public void actionPerformed(ActionEvent evt) {
+                parent.forestAreaZoomOut();
+          }
+        });
+        
         lb.add(this.Button_new);
         lb.add(this.Button_open);
         lb.add(this.Button_save);
@@ -112,7 +130,10 @@ public class View_ActionMenu extends JPanel{
         rb.add(this.Button_pause);
         rb.add(this.Button_nf);
         rb.add(this.Button_fast);
+        rb.add(this.Button_zoomin);
+        rb.add(this.Button_zoomout);
         
+                
         this.add(lb, BorderLayout.WEST);
         this.add(rb, BorderLayout.EAST);
         
