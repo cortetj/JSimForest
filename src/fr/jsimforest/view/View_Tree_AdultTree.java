@@ -11,12 +11,9 @@ import javax.swing.BorderFactory;
  *
  * @author EggMan
  */
-public class View_Tree_AdultTree extends View_Tree { 
-    public View_Tree_AdultTree() {
-
-        this.setBorder(BorderFactory.createLineBorder(Color.black, 1)); 
-        this.setPreferredSize(new Dimension(12,12));
-        this.setBackground(Color.decode("#0b210b"));
-
+public class View_Tree_AdultTree extends View_Cell {
+    
+    public View_Tree_AdultTree(int x, int y) {
+        super(x, y, Color.decode("#0b210b"));
     }
 }

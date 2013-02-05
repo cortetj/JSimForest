@@ -25,33 +25,53 @@ public class Controller_ForestArea {
 
         this.statut = 1;
 
-
-        int fo[][] = {{1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 0, 0, 1, 0, 0},
-                  {1, 3, 2, 2, 2, 0, 1, 0, 0, 1, 0, 0, 3, 0, 0, 1, 3, 0},
-                  {3, 1, 1, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 3, 0, 1},
-                  {1, 3, 1, 2, 0, 0, 1, 0, 0, 1, 3, 0, 1, 0, 0, 0, 0, 0},
-                  {1, 0, 0, 2, 2, 0, 1, 0, 0, 3, 0, 0, 3, 0, 0, 1, 3, 0},
-                  {0, 1, 1, 0, 0, 0, 0, 1, 2, 0, 0, 1, 0, 0, 3, 3, 0, 1},
-                  {1, 2, 0, 2, 0, 0, 1, 1, 2, 1, 3, 0, 1, 1, 2, 1, 0, 0},
-                  {1, 2, 3, 2, 2, 0, 1, 2, 3, 0, 0, 0, 3, 3, 2, 3, 3, 0},
-                  {0, 1, 1, 0, 0, 0, 3, 2, 2, 0, 0, 1, 0, 0, 0, 3, 0, 1},
-                  {1, 0, 0, 2, 0, 0, 1, 0, 0, 1, 3, 0, 1, 0, 0, 1, 0, 0},
-                  {1, 0, 0, 2, 2, 0, 1, 0, 0, 1, 0, 0, 3, 0, 0, 0, 3, 0},
-                  {1, 3, 1, 2, 0, 0, 1, 0, 0, 1, 3, 0, 1, 0, 0, 0, 0, 0},
-                  {1, 0, 0, 2, 2, 0, 1, 0, 0, 3, 0, 0, 3, 0, 0, 1, 3, 0},
-                  {0, 1, 1, 0, 0, 0, 0, 1, 2, 0, 0, 1, 0, 0, 3, 3, 0, 1},
-                  {1, 2, 0, 2, 0, 0, 1, 1, 2, 1, 3, 0, 1, 1, 2, 1, 0, 0},
-                  {1, 2, 3, 2, 2, 0, 1, 2, 3, 0, 0, 0, 3, 3, 2, 3, 3, 0},
-                  {0, 1, 1, 0, 0, 0, 3, 2, 2, 0, 0, 1, 0, 0, 0, 3, 0, 1},
-                  {1, 0, 0, 2, 0, 0, 1, 0, 0, 1, 3, 0, 1, 0, 0, 1, 0, 0},
-                  {1, 0, 0, 2, 2, 0, 1, 0, 0, 1, 0, 0, 3, 0, 0, 0, 3, 0},
-                  {0, 1, 1, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 3, 0, 1}};
-
+//        int fo[][] = {{1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 0, 0, 1, 0, 0},
+//                  {1, 3, 2, 2, 2, 0, 1, 0, 0, 1, 0, 0, 3, 0, 0, 1, 3, 0},
+//                  {3, 1, 1, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 3, 0, 1},
+//                  {1, 3, 1, 2, 0, 0, 1, 0, 0, 1, 3, 0, 1, 0, 0, 0, 0, 0},
+//                  {1, 0, 0, 2, 2, 0, 1, 0, 0, 3, 0, 0, 3, 0, 0, 1, 3, 0},
+//                  {0, 1, 1, 0, 0, 0, 0, 1, 2, 0, 0, 1, 0, 0, 3, 3, 0, 1},
+//                  {1, 2, 0, 2, 0, 0, 1, 1, 2, 1, 3, 0, 1, 1, 2, 1, 0, 0},
+//                  {1, 2, 3, 2, 2, 0, 1, 2, 3, 0, 0, 0, 3, 3, 2, 3, 3, 0},
+//                  {0, 1, 1, 0, 0, 0, 3, 2, 2, 0, 0, 1, 0, 0, 0, 3, 0, 1},
+//                  {1, 0, 0, 2, 0, 0, 1, 0, 0, 1, 3, 0, 1, 0, 0, 1, 0, 0},
+//                  {1, 0, 0, 2, 2, 0, 1, 0, 0, 1, 0, 0, 3, 0, 0, 0, 3, 0},
+//                  {1, 3, 1, 2, 0, 0, 1, 0, 0, 1, 3, 0, 1, 0, 0, 0, 0, 0},
+//                  {1, 0, 0, 2, 2, 0, 1, 0, 0, 3, 0, 0, 3, 0, 0, 1, 3, 0},
+//                  {0, 1, 1, 0, 0, 0, 0, 1, 2, 0, 0, 1, 0, 0, 3, 3, 0, 1},
+//                  {1, 2, 0, 2, 0, 0, 1, 1, 2, 1, 3, 0, 1, 1, 2, 1, 0, 0},
+//                  {1, 2, 3, 2, 2, 0, 1, 2, 3, 0, 0, 0, 3, 3, 2, 3, 3, 0},
+//                  {0, 1, 1, 0, 0, 0, 3, 2, 2, 0, 0, 1, 0, 0, 0, 3, 0, 1},
+//                  {1, 0, 0, 2, 0, 0, 1, 0, 0, 1, 3, 0, 1, 0, 0, 1, 0, 0},
+//                  {1, 0, 0, 2, 2, 0, 1, 0, 0, 1, 0, 0, 3, 0, 0, 0, 3, 0},
+//                  {0, 1, 1, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 3, 0, 1}};
+        
+        int fo[][] = new int[20][20];
+        for(int i=0; i<fo[0].length;i++) {
+            for(int j=0; j<fo.length; j++) {
+                fo[i][j] = 0;
+            }
+        }
+        
         Controller_ForestArea.ForestAreaTab = fo;
         this.updatePropWithTab();
     }
+    
+    public static void defautTab(int width, int height) {
         
-    public void updatePropWithTab() {
+        int fo[][] = new int[height][width];
+        
+        for(int i=0; i<height;i++) {
+            for(int j=0; j<width; j++) {
+                fo[i][j] = 0;
+            }
+        }
+        
+        Controller_ForestArea.ForestAreaTab = fo;
+        Controller_ForestArea.updatePropWithTab();
+    }
+        
+    public static void updatePropWithTab() {
         
         Controller_ForestArea.width = 0;
         Controller_ForestArea.height = 0;
@@ -60,13 +80,12 @@ public class Controller_ForestArea {
         Controller_ForestArea.Nbr_st = 0;
         Controller_ForestArea.Nbr_at = 0;
         
-        Controller_ForestArea.setWidth(Controller_ForestArea.getForestAreaTab().length);
-        Controller_ForestArea.setHeight(Controller_ForestArea.getForestAreaTab()[0].length);
-        
-        for (int i = 0; i<Controller_ForestArea.getWidth(); i++) {
-            for (int j = 0; j<Controller_ForestArea.getHeight(); j++) {
+        Controller_ForestArea.setHeight(Controller_ForestArea.getForestAreaTab().length);
+        Controller_ForestArea.setWidth(Controller_ForestArea.getForestAreaTab()[0].length);
+
+        for (int i = 0; i<Controller_ForestArea.getHeight(); i++) {
+            for (int j = 0; j<Controller_ForestArea.getWidth(); j++) {
                 
-                                        System.out.println(" emt : " + i);
 
                 switch(Controller_ForestArea.getForestAreaTab()[i][j]) {
                     case 0 : 
@@ -162,7 +181,7 @@ public class Controller_ForestArea {
     }
 
     /**
-     * @return the Nbr_at
+     * @return the Nbr_at 
      */
     public static int getNbr_at() {
         return Nbr_at;
@@ -187,5 +206,9 @@ public class Controller_ForestArea {
      */
     public void setForestAreaTab(int[][] ForestArea) {
         Controller_ForestArea.ForestAreaTab = ForestArea;
+    }
+    
+    public static void setForestAreaTabAt(int x, int y, int value) {
+        Controller_ForestArea.ForestAreaTab[x][y] = value;
     }
 }

@@ -24,25 +24,13 @@ public class View_StatMenu extends JPanel {
         private JButton Button_infect;
         
         private JLabel Label_width;
-        //private JLabel Label_width_var;
-        
         private JLabel Label_height;
-        //private JLabel Label_height_var;
-        
         private JLabel Label_total;
         
         private JLabel Label_empty;
-        //private JLabel Label_empty_var;
-        
         private JLabel Label_yp;
-        //private JLabel Label_yp_var;
-        
         private JLabel Label_st;
-        //private JLabel Label_st_var;
-        
         private JLabel Label_at;
-        //private JLabel Label_at_var;
-                
         
         public View_StatMenu() {
             

@@ -9,10 +9,11 @@ import fr.jsimforest.view.View_ActionMenu;
 import fr.jsimforest.view.View_ForestArea;
 import fr.jsimforest.view.View_StatMenu;
 import fr.jsimforest.view.View_TreeMenu;
+import fr.jsimforest.view.View_Tree_YoungPlant;
 import java.awt.BorderLayout;
+import java.util.Timer;
 import java.util.TimerTask;
 import javax.swing.*;
-import java.util.Timer;
 /**
  *
  * @author EggMan
@@ -31,9 +32,7 @@ public class Window extends JFrame{
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         
         this.getContentPane().setLayout(new BorderLayout());
-     
-        Controller_ForestArea ctr = new Controller_ForestArea();
-  
+       
         JPanel forestArea_zone = new JPanel(new BorderLayout());
         this.forestArea = new View_ForestArea();
         
@@ -43,7 +42,7 @@ public class Window extends JFrame{
         forestArea_zone.add(scroll);
         this.add(forestArea_zone, BorderLayout.CENTER);
         
-        this.Menu_action = new View_ActionMenu();
+        this.Menu_action = new View_ActionMenu(this);
         this.getContentPane().add(this.Menu_action, BorderLayout.NORTH);
         
         this.Menu_tree = new View_TreeMenu();
@@ -52,38 +51,19 @@ public class Window extends JFrame{
         this.Menu_stat = new View_StatMenu();
         this.getContentPane().add(this.Menu_stat, BorderLayout.SOUTH);
         
-        Reminder rmd = new Reminder(2);
+        //Reminder rmd = new Reminder(2);
         
-        this.update();
+        this.updateForest();
         
         this.setVisible(true);
         //this.pack();
-        this.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        this.setExtendedState(JFrame.MAXIMIZED_BOTH);                
 
     }
     
-    private void update() {
+    public void updateForest() {
+        this.forestArea.updateGrid();
         this.Menu_stat.updateLabelStat();
     }
     
-}
-
-class Reminder {
-    Timer timer;
-
-    public Reminder(int seconds) {
-        timer = new Timer();
-        timer.schedule(new RemindTask(),
-                       0,        //initial delay
-                       1*1000);
-	}
-
-    class RemindTask extends TimerTask {
-        @Override
-        public void run() {
-            System.out.format("Time's up!%n");
-            //timer.cancel(); //Terminate the timer thread
-        }
-    }
-
 }

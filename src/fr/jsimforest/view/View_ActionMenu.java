@@ -13,6 +13,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JPanel;
+import jsimforest.Window;
 import jsimforest.Window_LoadForest;
 import jsimforest.Window_NewForest;
 
@@ -32,7 +33,7 @@ public class View_ActionMenu extends JPanel{
     private JButton Button_fast;
     
     
-    public View_ActionMenu() {
+    public View_ActionMenu(final Window parent) {
         
         JPanel lb = new JPanel();
         JPanel rb = new JPanel();
@@ -52,10 +53,10 @@ public class View_ActionMenu extends JPanel{
         this.Button_new.addActionListener(new ActionListener() {
           @Override
           public void actionPerformed(ActionEvent evt) {
-                 Window_NewForest Window_new = new Window_NewForest();
+                 Window_NewForest Window_new = new Window_NewForest(parent);
           }
         });
-        
+
         ImageIcon Ico_open = new ImageIcon("img/ico_open.png");        
         this.Button_open = new JButton("Open", Ico_open);
         this.Button_open.setOpaque(true);
@@ -69,14 +70,14 @@ public class View_ActionMenu extends JPanel{
                 fc.showOpenDialog(fc);
           }
         });
-        
+
         ImageIcon Ico_save = new ImageIcon("img/ico_save.png");        
         this.Button_save = new JButton("Save", Ico_save);
         this.Button_save.setOpaque(true);
         this.Button_save.setBorderPainted(false);
         this.Button_save.setBackground(Color.decode("#A9A9A9"));
         this.Button_save.setForeground(Color.white);
-        
+
         ImageIcon Ico_load = new ImageIcon("img/ico_load.png");        
         this.Button_load = new JButton("Load", Ico_load);
         this.Button_load.setOpaque(true);
