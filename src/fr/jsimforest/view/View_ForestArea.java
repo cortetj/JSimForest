@@ -47,14 +47,20 @@ public class View_ForestArea extends JPanel{
                 
                 this.gbc.gridx = j;
 
-                switch(Controller_ForestArea.getForestAreaTab()[j][i]) {
-                    case 0 : this.add(new View_Cell_Empty(j, i), this.gbc);
+                switch(Controller_ForestArea.getForestAreaTab()[i][j]) {
+                    case 0 : this.add(new View_Cell_Empty(i, j), this.gbc);
                         break;
-                    case 1 : this.add(new View_Tree_YoungPlant(j, i), this.gbc);
+                    case 1 : this.add(new View_Tree_YoungPlant(i, j), this.gbc);
                         break;
-                    case 2 : this.add(new View_Tree_SmallTree(j, i), this.gbc);
+                    case 2 : this.add(new View_Tree_SmallTree(i, j), this.gbc);
                         break;
-                    case 3 : this.add(new View_Tree_AdultTree(j, i), this.gbc);
+                    case 3 : this.add(new View_Tree_AdultTree(i, j), this.gbc);
+                        break;
+                    case 4 : this.add(new View_Tree_Fire(i, j), this.gbc);
+                        break;
+                    case 5 : this.add(new View_Tree_Infect(i, j), this.gbc);
+                        break;
+                    case 6 : this.add(new View_Cell_Ash(i, j), this.gbc);
                         break;
                 }
 
@@ -86,10 +92,22 @@ public class View_ForestArea extends JPanel{
                         Controller_ForestArea.setForestAreaTabAt(x, y, 3);
                         this.add(new View_Tree_AdultTree(x, y), this.gbc);
                         break;
+                    case 4 :
+                        Controller_ForestArea.setForestAreaTabAt(x, y, 4);
+                        this.add(new View_Tree_Fire(x, y), this.gbc);
+                        break;
+                    case 5 :
+                        Controller_ForestArea.setForestAreaTabAt(x, y, 5);
+                        this.add(new View_Tree_Infect(x, y), this.gbc);
+                        break;
+                    case 6 :
+                        Controller_ForestArea.setForestAreaTabAt(x, y, 6);
+                        this.add(new View_Cell_Ash(x, y), this.gbc);
+                        break;
                 }
             
             this.revalidate();
             //this.repaint(); 
-            
+            View_StatMenu.updateLabelStat();
     }
 }

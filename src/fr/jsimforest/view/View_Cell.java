@@ -4,6 +4,7 @@
  */
 package fr.jsimforest.view;
 
+import fr.jsimforest.controller.Controller_Cell;
 import fr.jsimforest.controller.Controller_ForestArea;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -56,8 +57,7 @@ public class View_Cell extends JPanel implements MouseListener {
     public void mouseClicked(MouseEvent e) {
         
         View_ForestArea fa = (View_ForestArea) getParent();
-        
-        fa.setCellAt(this.x, this.y, 2);
+        fa.setCellAt(this.x, this.y, Controller_Cell.getSelected_tree());
         fa.updateGrid();
 
 //       for(int i=0; i<Controller_ForestArea.getHeight(); i++) {
