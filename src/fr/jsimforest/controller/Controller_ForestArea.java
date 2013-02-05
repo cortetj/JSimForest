@@ -17,6 +17,9 @@ public class Controller_ForestArea {
         private static int Nbr_yp;
         private static int Nbr_st;
         private static int Nbr_at;
+        private static int Nbr_fire;
+        private static int Nbr_ash;
+        private static int Nbr_infect;
         
         private static int statut;
 
@@ -79,6 +82,9 @@ public class Controller_ForestArea {
         Controller_ForestArea.Nbr_yp = 0;
         Controller_ForestArea.Nbr_st = 0;
         Controller_ForestArea.Nbr_at = 0;
+        Controller_ForestArea.setNbr_fire(0);
+        Controller_ForestArea.setNbr_ash(0);
+        Controller_ForestArea.setNbr_infect(0);
         
         Controller_ForestArea.setHeight(Controller_ForestArea.getForestAreaTab().length);
         Controller_ForestArea.setWidth(Controller_ForestArea.getForestAreaTab()[0].length);
@@ -101,6 +107,18 @@ public class Controller_ForestArea {
                         
                      case 3 : 
                         Controller_ForestArea.setNbr_at(Controller_ForestArea.getNbr_at() + 1);
+                        break;
+            
+                    case 4 : 
+                        Controller_ForestArea.setNbr_fire(Controller_ForestArea.getNbr_fire() + 1);
+                        break;
+                        
+                    case 5 : 
+                        Controller_ForestArea.setNbr_infect(Controller_ForestArea.getNbr_infect() + 1);
+                        break;
+                        
+                     case 6 : 
+                        Controller_ForestArea.setNbr_ash(Controller_ForestArea.getNbr_ash() + 1);
                         break;
                 }
                 
@@ -208,7 +226,109 @@ public class Controller_ForestArea {
         Controller_ForestArea.ForestAreaTab = ForestArea;
     }
     
+    /**
+     * @return the Nbr_fire
+     */
+    public static int getNbr_fire() {
+        return Nbr_fire;
+    }
+
+    /**
+     * @param aNbr_fire the Nbr_fire to set
+     */
+    public static void setNbr_fire(int aNbr_fire) {
+        Nbr_fire = aNbr_fire;
+    }
+
+    /**
+     * @return the Nbr_ash
+     */
+    public static int getNbr_ash() {
+        return Nbr_ash;
+    }
+
+    /**
+     * @param aNbr_ash the Nbr_ash to set
+     */
+    public static void setNbr_ash(int aNbr_ash) {
+        Nbr_ash = aNbr_ash;
+    }
+
+    /**
+     * @return the Nbr_infect
+     */
+    public static int getNbr_infect() {
+        return Nbr_infect;
+    }
+
+    /**
+     * @param aNbr_infect the Nbr_infect to set
+     */
+    public static void setNbr_infect(int aNbr_infect) {
+        Nbr_infect = aNbr_infect;
+    }
+
+    
     public static void setForestAreaTabAt(int x, int y, int value) {
+        
+        switch(Controller_ForestArea.ForestAreaTab[x][y]) {
+                    case 0 : 
+                        Controller_ForestArea.setNbr_empty(Controller_ForestArea.getNbr_empty() - 1);
+                        break;
+                    case 1 : 
+                        Controller_ForestArea.setNbr_yp(Controller_ForestArea.getNbr_yp() - 1);
+                        break;
+                        
+                    case 2 : 
+                        Controller_ForestArea.setNbr_st(Controller_ForestArea.getNbr_st() - 1);
+                        break;
+                        
+                     case 3 : 
+                        Controller_ForestArea.setNbr_at(Controller_ForestArea.getNbr_at() - 1);
+                        break;
+                         
+                    case 4 : 
+                        Controller_ForestArea.setNbr_fire(Controller_ForestArea.getNbr_fire() - 1);
+                        break;
+                        
+                    case 5 : 
+                        Controller_ForestArea.setNbr_infect(Controller_ForestArea.getNbr_infect() - 1);
+                        break;
+                        
+                    case 6 : 
+                        Controller_ForestArea.setNbr_ash(Controller_ForestArea.getNbr_ash() - 1);
+                        break;
+         }
+        
         Controller_ForestArea.ForestAreaTab[x][y] = value;
+        
+        switch(Controller_ForestArea.ForestAreaTab[x][y]) {
+                    case 0 : 
+                        Controller_ForestArea.setNbr_empty(Controller_ForestArea.getNbr_empty() + 1);
+                        break;
+                    case 1 : 
+                        Controller_ForestArea.setNbr_yp(Controller_ForestArea.getNbr_yp() + 1);
+                        break;
+                        
+                    case 2 : 
+                        Controller_ForestArea.setNbr_st(Controller_ForestArea.getNbr_st() + 1);
+                        break;
+                        
+                     case 3 : 
+                        Controller_ForestArea.setNbr_at(Controller_ForestArea.getNbr_at() + 1);
+                        break;
+                         
+                   case 4 : 
+                        Controller_ForestArea.setNbr_fire(Controller_ForestArea.getNbr_fire() + 1);
+                        break;
+                        
+                    case 5 : 
+                        Controller_ForestArea.setNbr_infect(Controller_ForestArea.getNbr_infect() + 1);
+                        break;
+                        
+                    case 6 : 
+                        Controller_ForestArea.setNbr_ash(Controller_ForestArea.getNbr_ash() + 1);
+                        break;
+         }      
     }
 }
