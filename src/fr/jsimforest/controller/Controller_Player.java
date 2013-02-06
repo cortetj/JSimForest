@@ -25,7 +25,7 @@ public class Controller_Player {
         public Controller_Player(Window parent) {
             this.rt = new Controller_Player.RemindTask();
             this.parent = parent;
-            Controller_Player.nbr_step = 5;
+            Controller_Player.nbr_step = 1000;
             Controller_Player.gap = 5;
             timer = new Timer();
             this.moore = new Controller_Moore();

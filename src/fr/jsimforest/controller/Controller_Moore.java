@@ -2,23 +2,31 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package fr.jsimforest.controller;
 
+package fr.jsimforest.controller;
+import java.util.ArrayList;
 
 /**
  *
  * @author raff
  */
-public class Controller_Moore { 
+public class Controller_Moore {
+    private int x;
+    private int y;
+    
+    public Controller_Moore(int x, int y){
+        this.x=x;
+        this.y=y;
+    }
     
     private int[] NeighboorMoor(int forestArea[][], int y, int x){
         // Test pour 8 voisins
         //int table[]=new int[5];
         
-        if(y-1>0 && y+1<forestArea.length && x-1>0 && x+1<forestArea[0].length){
+        /*if(y-1>0 && y+1<forestArea.length && x-1>0 && x+1<forestArea[0].length){
             int table[]={forestArea[y][x+1], forestArea[y][x-1], forestArea[y-1][x-1], forestArea[y+1][x-1], forestArea[y+1][x], forestArea[y-1][x], forestArea[y-1][x+1], forestArea[y+1][x+1]};
             return table;
-        }
+        }*/
        // if(y-1<0 && y+1)
         
         if(y>0 && y<forestArea.length && x>0 && x<forestArea.length){
@@ -54,6 +62,7 @@ public class Controller_Moore {
         else if(x==forestArea[0].length && y==0){
             int neighboor[]={forestArea[y][x-1], forestArea[y+1][x-1], forestArea[y+1][x]};
             return neighboor;
+            
         }
         else if(x==forestArea[0].length && y==forestArea.length){
            int neighboor[]={forestArea[y][x-1], forestArea[y-1][x-1], forestArea[y-1][x]};
@@ -62,21 +71,55 @@ public class Controller_Moore {
         int defaut[]=null;
         return defaut;
     }
+     public ArrayList<Integer> getVoisinMoore(int _x, int _y, int[][] forestArea) {
+        // int[] neighboor=null;
+         ArrayList<Integer> neighboor=new ArrayList<Integer>();
+        //ArrayList<Case> voisins = new ArrayList<Case>();
+        if (_y < 0 || _y >= y || _x < 0 || _x >= x) {
+            return neighboor;
+        } else {
+            if (_x - 1 >= 0) {
+                neighboor.add(forestArea[_y][_x-1]);
+                if (_y - 1 >= 0) {
+                 neighboor.add(forestArea[_y-1][_x-1]);
+                }
+                if (_y + 1 < y) {
+                   neighboor.add(forestArea[_y+1][_x-1]);
+                }
+            }
+            if (_x + 1 < x) {
+                neighboor.add(forestArea[_y][_x+1]);//voisins.add(getCase(_x + 1, _y));
+                if (_y - 1 >= 0) {
+                neighboor.add(forestArea[_y-1][_x+1]);;  //  voisins.add(getCase(_x + 1, _y - 1));
+                }
+                if (_y + 1 < y) {
+                neighboor.add(forestArea[_y+1][_x+1]);//    voisins.add(getCase(_x + 1, _y + 1));
+                }
+            }
+            if (_y - 1 >= 0) {
+                neighboor.add(forestArea[_y-1][_x]);
+                //voisins.add(getCase(_x, _y - 1));
+            }
+            if (_y + 1 < y) {
+                neighboor.add(forestArea[_y+1][_x]);
+                //voisins.add(getCase(_x, _y + 1));
+            }
+            return neighboor;
+        }
+    }
     
-    private int[] NeighboorVanNeumann(int forestArea[][], int y, int x){
+   /* private int[] NeighboorVanNeumann(int forestArea[][], int y, int x){
         
         return 
         
-    }
+    }*/
     
     public int CountTypeNeighboor(int forestArea[][], int y, int x, int type){
         int count[]={0, 0, 0, 0, 0, 0, 0};
-        int list_neigh[];
-        list_neigh = NeighboorMoor(forestArea, y, x);
+        ArrayList<Integer> countList= getVoisinMoore(y, x, forestArea);
         
-        for(int i=0;i<list_neigh.length;i++){
-            
-            switch(list_neigh[i]){
+        for(int i=0;i<countList.size();i++){   
+            switch(countList.get(i)){
                 case 0:
                     count[0]++;
                 //  NeighBoorMoor();
@@ -100,10 +143,12 @@ public class Controller_Moore {
                     count[6]++;
                     break; 
             }
+            
         //list_neigh = NeighboorMoor(forestArea, y, x);
         //NeighBoorMoor(forestArea, y, x);
         }
-        switch(type){
+        return count[type];
+        /*switch(type){
             case 0:
                return count[0];
             case 1:
@@ -119,7 +164,7 @@ public class Controller_Moore {
             case 6:
                return count[6]; 
         }
-        return 0;
+        return 0;*/
     }
     
     public int[][] changeCell(int forestArea[][], int tempforestArea[][], int y, int x){
@@ -207,9 +252,7 @@ public class Controller_Moore {
                     temp=changeCell(temp, temp, i, j);
                 }
             }
-            Controller_ForestArea.setForestAreaTab(temp);
-            
-            
+            Controller_ForestArea.setForestAreaTab(temp); 
         }
          
         public int getRandom(){
