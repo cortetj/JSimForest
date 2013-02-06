@@ -45,7 +45,7 @@ public class View_ForestArea extends JPanel{
     public void updateGrid() {
         
         this.removeAll();   
-        
+        Controller_ForestArea.updatePropWithTab();
         
         for(int i=0; i<Controller_ForestArea.getHeight(); i++) {
             
@@ -128,7 +128,6 @@ public class View_ForestArea extends JPanel{
         View_Cell.setCell_height(View_Cell.getCell_height() + 2);
         View_Cell.setCell_width(View_Cell.getCell_width() + 2);
         
-        System.out.println("Cell : " + View_Cell.getCell_height());
         this.updateGrid();
     }
 
@@ -139,7 +138,6 @@ public class View_ForestArea extends JPanel{
             View_Cell.setCell_width(View_Cell.getCell_width() - 2);
         }
         
-        System.out.println("Cell : " + View_Cell.getCell_height());
         this.updateGrid();
     }
 }

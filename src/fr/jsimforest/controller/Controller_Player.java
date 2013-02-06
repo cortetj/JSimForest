@@ -6,6 +6,7 @@ package fr.jsimforest.controller;
 
 import java.util.Timer;
 import java.util.TimerTask;
+import jsimforest.Window;
 
 /**
  *
@@ -17,25 +18,34 @@ public class Controller_Player {
         private int gap;
         private Timer timer;
         private Controller_Moore moore;
+        private Window parent;
 
-        public Controller_Player() {
+        public Controller_Player(Window parent) {
+            this.parent = parent;
             timer = new Timer();
             this.moore = new Controller_Moore();
-
-    //        timer.schedule(new Controller_Player.RemindTask(),
-    //                       0,        //initial delay
-    //                       1*1000);
         }
         
         public void nextStep() {
-            this.moore.evolutionArea();
+            moore.evolutionArea();
+        }
+        
+        public void autoPlay() {
+            timer.schedule(new Controller_Player.RemindTask(),
+                           0,        //initial delay
+                           1*500);
+        }
+        
+        public void stopPlayer() {
+            timer.cancel();
         }
         
         class RemindTask extends TimerTask {
             @Override
             public void run() {
-                System.out.format("Time's up!%n");
-                //timer.cancel(); //Terminate the timer thread
+                moore.evolutionArea();
+                parent.updateForest();
+                
             }
         }
 }

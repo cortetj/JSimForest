@@ -62,8 +62,6 @@ public class Controller_Moore {
         int list_neigh[];
         list_neigh = NeighboorMoor(forestArea, y, x);
         
-        System.out.println("SIZE : " + list_neigh.length);
-        
         for(int i=0;i<list_neigh.length;i++){
             
             switch(list_neigh[i]){
@@ -154,19 +152,16 @@ public class Controller_Moore {
            if(tempforestArea[y][x]==1){
                if(this.getRandom()<=25000){
                    forestArea[y][x]=4;
-                   System.out.println();
                }
            }
            else if(tempforestArea[y][x]==2){
                if(this.getRandom()<=50000){
                    forestArea[y][x]=4;
-                   System.out.println();
                }
            }
            else if(tempforestArea[y][x]==3){
                if(this.getRandom()<=75000){
                    forestArea[y][x]=4;
-                   System.out.println();
                }
            }
        }

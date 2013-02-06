@@ -63,7 +63,7 @@ public class Window extends JFrame{
     
     public void updateForest() {
         this.forestArea.updateGrid();
-        this.Menu_stat.updateLabelStat();
+        View_StatMenu.updateLabelStat();
     }
 
     /**

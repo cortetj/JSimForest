@@ -43,7 +43,7 @@ public class View_ActionMenu extends JPanel{
         JPanel lb = new JPanel();
         JPanel rb = new JPanel();
          
-        this.player = new Controller_Player();
+        this.player = new Controller_Player(parent);
         //this.setBorder(BorderFactory.createLineBorder(Color.black, 1)); 
         this.setPreferredSize(new Dimension(0,45));
         //this.setBackground(Color.GREEN);
@@ -99,9 +99,22 @@ public class View_ActionMenu extends JPanel{
         
         ImageIcon Ico_play = new ImageIcon("img/ico_play.png"); 
         this.Button_play = new JButton(Ico_play);
+        this.Button_play.addActionListener(new ActionListener() {
+          @Override
+          public void actionPerformed(ActionEvent evt) {
+              player.autoPlay();
+          }
+        });
         
         ImageIcon Ico_pause = new ImageIcon("img/ico_pause.png"); 
         this.Button_pause = new JButton(Ico_pause);
+        this.Button_pause.addActionListener(new ActionListener() {
+          @Override
+          public void actionPerformed(ActionEvent evt) {
+              player.stopPlayer();
+              parent.updateForest();
+          }
+        });
         
         ImageIcon Ico_nf = new ImageIcon("img/ico_nextframe.png"); 
         this.Button_nf = new JButton(Ico_nf);
