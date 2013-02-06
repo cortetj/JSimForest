@@ -15,6 +15,12 @@ public class Controller_Moore {
         // Test pour 8 voisins
         //int table[]=new int[5];
         
+        if(y-1>0 && y+1<forestArea.length && x-1>0 && x+1<forestArea[0].length){
+            int table[]={forestArea[y][x+1], forestArea[y][x-1], forestArea[y-1][x-1], forestArea[y+1][x-1], forestArea[y+1][x], forestArea[y-1][x], forestArea[y-1][x+1], forestArea[y+1][x+1]};
+            return table;
+        }
+       // if(y-1<0 && y+1)
+        
         if(y>0 && y<forestArea.length && x>0 && x<forestArea.length){
            int neighboor[]={forestArea[y][x+1], forestArea[y][x-1], forestArea[y-1][x-1], forestArea[y+1][x-1], forestArea[y+1][x], forestArea[y-1][x], forestArea[y-1][x+1], forestArea[y+1][x+1]};
            return neighboor;
@@ -55,6 +61,12 @@ public class Controller_Moore {
         }
         int defaut[]=null;
         return defaut;
+    }
+    
+    private int[] NeighboorVanNeumann(int forestArea[][], int y, int x){
+        
+        return 
+        
     }
     
     public int CountTypeNeighboor(int forestArea[][], int y, int x, int type){
@@ -110,7 +122,7 @@ public class Controller_Moore {
     public int[][] changeCell(int forestArea[][], int tempforestArea[][], int y, int x){
         /*   rappel code état : vide=0
          *                      jeune pousse=1
-         *                      arbustre=2 
+         *                      arbustre=2
          *                      arbre=3 
          *                      feu=4 
          *                      cendre=5 
