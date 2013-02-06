@@ -13,7 +13,9 @@ public class Controller_ForestArea {
         private static int[][] ForestAreaTab;
                 
         private static String name;
-
+        
+        private static int step;
+        
         private static int width;
         private static int height;
         private static int Nbr_empty;
@@ -26,11 +28,13 @@ public class Controller_ForestArea {
         
         private static int statut;
 
+
         
     public Controller_ForestArea() {
 
         this.statut = 1;
         this.name = "Default Forest";
+        this.step = 0;
         
 //        int fo[][] = {{1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 0, 0, 1, 0, 0},
 //                  {1, 3, 2, 2, 2, 0, 1, 0, 0, 1, 0, 0, 3, 0, 0, 1, 3, 0},
@@ -310,6 +314,20 @@ public class Controller_ForestArea {
         name = aName;
     }
 
+
+    /**
+     * @return the step
+     */
+    public static int getStep() {
+        return step;
+    }
+
+    /**
+     * @param aStep the step to set
+     */
+    public static void setStep(int aStep) {
+        step = aStep;
+    }
     
     public static void setForestAreaTabAt(int x, int y, int value) {
         

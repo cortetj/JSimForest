@@ -76,8 +76,6 @@ public class View_ForestArea extends JPanel{
         }
         this.revalidate();
         this.repaint();
-         
-        this.parent.setWindow_title("JSimForest - " + Controller_ForestArea.getName());
         
         
     }
