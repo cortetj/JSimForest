@@ -4,6 +4,7 @@
  */
 package fr.jsimforest.view;
 
+import fr.jsimforest.controller.Controller_Player;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -34,12 +35,15 @@ public class View_ActionMenu extends JPanel{
     private JButton Button_zoomin;
     private JButton Button_zoomout;
     
+    private Controller_Player player;
+    
     
     public View_ActionMenu(final Window parent) {
         
         JPanel lb = new JPanel();
         JPanel rb = new JPanel();
          
+        this.player = new Controller_Player();
         //this.setBorder(BorderFactory.createLineBorder(Color.black, 1)); 
         this.setPreferredSize(new Dimension(0,45));
         //this.setBackground(Color.GREEN);
@@ -101,6 +105,13 @@ public class View_ActionMenu extends JPanel{
         
         ImageIcon Ico_nf = new ImageIcon("img/ico_nextframe.png"); 
         this.Button_nf = new JButton(Ico_nf);
+        this.Button_nf.addActionListener(new ActionListener() {
+          @Override
+          public void actionPerformed(ActionEvent evt) {
+              player.nextStep();
+              parent.updateForest();
+          }
+        });
         
         ImageIcon Ico_fast = new ImageIcon("img/ico_fast.png"); 
         this.Button_fast = new JButton(Ico_fast);

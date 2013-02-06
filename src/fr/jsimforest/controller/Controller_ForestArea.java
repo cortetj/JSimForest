@@ -11,7 +11,7 @@ package fr.jsimforest.controller;
 public class Controller_ForestArea {
    
         private static int[][] ForestAreaTab;
-        
+                
         private static String name;
 
         private static int width;
@@ -31,7 +31,7 @@ public class Controller_ForestArea {
 
         this.statut = 1;
         this.name = "Default Forest";
-
+        
 //        int fo[][] = {{1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 0, 0, 1, 0, 0},
 //                  {1, 3, 2, 2, 2, 0, 1, 0, 0, 1, 0, 0, 3, 0, 0, 1, 3, 0},
 //                  {3, 1, 1, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 3, 0, 1},
@@ -62,6 +62,27 @@ public class Controller_ForestArea {
         
         Controller_ForestArea.ForestAreaTab = fo;
         this.updatePropWithTab();
+        
+//       System.out.println(" ---------- BEFORE -------");
+//       for(int i=0; i<Controller_ForestArea.getHeight(); i++) {
+//            for(int j=0; j<Controller_ForestArea.getWidth(); j++) {
+//                System.out.print(Controller_ForestArea.getForestAreaTab()[i][j]);
+//            }
+//                System.out.println("");
+//        }
+//        System.out.println("");
+//       
+//        this.moore.evolutionArea();
+//        
+//        System.out.println(" ---------- AFTER -------");
+//       for(int i=0; i<Controller_ForestArea.getHeight(); i++) {
+//            for(int j=0; j<Controller_ForestArea.getWidth(); j++) {
+//                System.out.print(Controller_ForestArea.getForestAreaTab()[i][j]);
+//            }
+//                System.out.println("");
+//        }
+//        System.out.println("");
+        
     }
     
     public static void defautTab(int width, int height, String name) {
@@ -79,7 +100,7 @@ public class Controller_ForestArea {
         Controller_ForestArea.ForestAreaTab = fo;
         Controller_ForestArea.updatePropWithTab();
     }
-        
+    
     public static void updatePropWithTab() {
         
         Controller_ForestArea.width = 0;
@@ -228,7 +249,7 @@ public class Controller_ForestArea {
     /**
      * @param ForestArea the ForestArea to set
      */
-    public void setForestAreaTab(int[][] ForestArea) {
+    public static void setForestAreaTab(int[][] ForestArea) {
         Controller_ForestArea.ForestAreaTab = ForestArea;
     }
     

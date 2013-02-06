@@ -11,17 +11,24 @@ import java.util.TimerTask;
  *
  * @author EggMan
  */
-class Controller_Player {
+public class Controller_Player {
     
         private int time;
         private int gap;
         private Timer timer;
+        private Controller_Moore moore;
 
         public Controller_Player() {
-        timer = new Timer();
-        timer.schedule(new Controller_Player.RemindTask(),
-                       0,        //initial delay
-                       1*1000);
+            timer = new Timer();
+            this.moore = new Controller_Moore();
+
+    //        timer.schedule(new Controller_Player.RemindTask(),
+    //                       0,        //initial delay
+    //                       1*1000);
+        }
+        
+        public void nextStep() {
+            this.moore.evolutionArea();
         }
         
         class RemindTask extends TimerTask {

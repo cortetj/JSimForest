@@ -24,7 +24,7 @@ public class Controller_Moore {
            int neighboor[]={forestArea[y][x+1], forestArea[y+1][x], forestArea[y-1][x], forestArea[y-1][x+1], forestArea[y+1][x+1]};
            return neighboor;
         }
-        else if(y==0 && x>0 && x<forestArea[0].length){
+        else if(y==0 && x>0 && x<forestArea[0].length -1){
            int neighboor[]={forestArea[y][x+1], forestArea[y][x-1], forestArea[y+1][x], forestArea[y+1][x+1], forestArea[y+1][x-1]};
            return neighboor;
         }
@@ -59,10 +59,14 @@ public class Controller_Moore {
     
     public int CountTypeNeighboor(int forestArea[][], int y, int x, int type){
         int count[]={0, 0, 0, 0, 0, 0, 0};
-        int list[]=NeighboorMoor(forestArea, y, x);
+        int list_neigh[];
+        list_neigh = NeighboorMoor(forestArea, y, x);
         
-        for(int i=0;i<list.length;i++){
-            switch(list[i]){
+        System.out.println("SIZE : " + list_neigh.length);
+        
+        for(int i=0;i<list_neigh.length;i++){
+            
+            switch(list_neigh[i]){
                 case 0:
                     count[0]++;
                 //  NeighBoorMoor();
@@ -86,6 +90,7 @@ public class Controller_Moore {
                     count[6]++;
                     break; 
             }
+        //list_neigh = NeighboorMoor(forestArea, y, x);
         //NeighBoorMoor(forestArea, y, x);
         }
         switch(type){
@@ -186,14 +191,18 @@ public class Controller_Moore {
        }*/
 
     }
-         public int[][] evolutionArea(int forestArea[][]){
-            int temp[][]=forestArea;
-            for(int i=0; i<20;i++){
-                for(int j=0; j<17;j++){
-                    forestArea=changeCell(forestArea, temp, i, j);
+         public void evolutionArea(){
+             
+            int temp[][]=Controller_ForestArea.getForestAreaTab();
+
+            for(int i=0; i<temp.length-1;i++){
+                for(int j=0; j<temp[0].length-1;j++){
+                    temp=changeCell(temp, temp, i, j);
                 }
             }
-            return forestArea;
+            Controller_ForestArea.setForestAreaTab(temp);
+            
+            
         }
          
         public int getRandom(){
