@@ -20,6 +20,8 @@ public class View_Cell extends JPanel implements MouseListener {
     
     private int x;
     private int y;
+    private static int Cell_width;
+    private static int Cell_height;
     
     private Color color;
     
@@ -31,7 +33,7 @@ public class View_Cell extends JPanel implements MouseListener {
         
         this.addMouseListener(this);
         this.setBorder(BorderFactory.createLineBorder(Color.black, 1)); 
-        this.setPreferredSize(new Dimension(12,12));
+        this.setPreferredSize(new Dimension(View_Cell.getCell_width(), View_Cell.getCell_height()));
         this.setBackground(this.color);
     }
 
@@ -82,5 +84,32 @@ public class View_Cell extends JPanel implements MouseListener {
     public void setColor(Color color) {
         this.color = color;
     }
-
+    /**
+     * @return the Cell_width
+     */
+    public static int getCell_width() {
+        return Cell_width;
     }
+
+    /**
+     * @param aCell_width the Cell_width to set
+     */
+    public static void setCell_width(int aCell_width) {
+        Cell_width = aCell_width;
+    }
+
+    /**
+     * @return the Cell_height
+     */
+    public static int getCell_height() {
+        return Cell_height;
+    }
+
+    /**
+     * @param aCell_height the Cell_height to set
+     */
+    public static void setCell_height(int aCell_height) {
+        Cell_height = aCell_height;
+    }
+    
+}

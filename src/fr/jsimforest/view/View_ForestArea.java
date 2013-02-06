@@ -5,10 +5,13 @@
 package fr.jsimforest.view;
 
 import fr.jsimforest.controller.Controller_ForestArea;
+import jsimforest.Window;
 import java.awt.Color;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
 /**
  *
  * @author EggMan
@@ -17,11 +20,16 @@ public class View_ForestArea extends JPanel{
     
     private GridBagLayout gbl;
     private GridBagConstraints gbc;
+    private Window parent;
     
-    public View_ForestArea() {
-               
-        Controller_ForestArea ctr = new Controller_ForestArea();
+    public View_ForestArea(Window win) {
 
+         this.parent = win;
+        Controller_ForestArea ctr = new Controller_ForestArea();
+        
+        View_Cell.setCell_height(12);
+        View_Cell.setCell_width(12);
+        
         this.setBackground(Color.decode("#DDDDDD"));
         this.gbl = new GridBagLayout();
         this.setLayout(this.gbl);
@@ -37,7 +45,7 @@ public class View_ForestArea extends JPanel{
     public void updateGrid() {
         
         this.removeAll();   
-        this.repaint();
+        
         
         for(int i=0; i<Controller_ForestArea.getHeight(); i++) {
             
@@ -66,6 +74,11 @@ public class View_ForestArea extends JPanel{
 
             }
         }
+        this.revalidate();
+        this.repaint();
+         
+        this.parent.setWindow_title("JSimForest - " + Controller_ForestArea.getName());
+        
         
     }
     
@@ -109,5 +122,24 @@ public class View_ForestArea extends JPanel{
             this.revalidate();
             //this.repaint(); 
             View_StatMenu.updateLabelStat();
+    }
+
+    public void zoomin() {
+        View_Cell.setCell_height(View_Cell.getCell_height() + 2);
+        View_Cell.setCell_width(View_Cell.getCell_width() + 2);
+        
+        System.out.println("Cell : " + View_Cell.getCell_height());
+        this.updateGrid();
+    }
+
+    public void zoomout() {
+        if (View_Cell.getCell_height() > 2 && View_Cell.getCell_width() > 2) {
+            
+            View_Cell.setCell_height(View_Cell.getCell_height() - 2);
+            View_Cell.setCell_width(View_Cell.getCell_width() - 2);
+        }
+        
+        System.out.println("Cell : " + View_Cell.getCell_height());
+        this.updateGrid();
     }
 }

@@ -27,7 +27,6 @@ class Controller_Player {
         class RemindTask extends TimerTask {
             @Override
             public void run() {
-               
                 System.out.format("Time's up!%n");
                 //timer.cancel(); //Terminate the timer thread
             }
