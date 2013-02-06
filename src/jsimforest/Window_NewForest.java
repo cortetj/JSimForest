@@ -71,6 +71,9 @@ public class Window_NewForest extends JFrame {
           @Override
           public void actionPerformed(ActionEvent evt) {
                 Controller_ForestArea.defautTab(Model_width.getNumber().intValue(), Model_height.getNumber().intValue(), Text_name.getText());
+                Controller_ForestArea.setStep(0);
+
+                parent.setWindow_title("JSimForest - " + Controller_ForestArea.getName());
                 parent.updateForest();
                 dispose();
           }

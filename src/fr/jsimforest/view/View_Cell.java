@@ -44,7 +44,6 @@ public class View_Cell extends JPanel implements MouseListener {
 
     @Override
     public void mouseExited(MouseEvent e) {
-        System.out.println(" class : " + this.getClass());
         this.setBorder(BorderFactory.createLineBorder(Color.BLACK, 1));
 
     }
