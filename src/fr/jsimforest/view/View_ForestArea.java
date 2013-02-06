@@ -5,6 +5,8 @@
 package fr.jsimforest.view;
 
 import fr.jsimforest.controller.Controller_ForestArea;
+import fr.jsimforest.model.Enum_Cell;
+import fr.jsimforest.view.View_Cell;
 import jsimforest.Window;
 import java.awt.Color;
 import java.awt.GridBagConstraints;
@@ -20,11 +22,12 @@ public class View_ForestArea extends JPanel{
     
     private GridBagLayout gbl;
     private GridBagConstraints gbc;
+    private View_Cell Cells[][];
     private Window parent;
     
     public View_ForestArea(Window win) {
-
-         this.parent = win;
+                
+        this.parent = win;
         Controller_ForestArea ctr = new Controller_ForestArea();
         
         View_Cell.setCell_height(12);
@@ -38,13 +41,49 @@ public class View_ForestArea extends JPanel{
         this.gbc.gridheight = 1;
         this.gbc.gridwidth = 1;
 
-        this.updateGrid();
+        this.createGrid();
         
+    }
+    
+    public void createGrid() {
+        
+        this.removeAll();   
+
+        this.Cells = new View_Cell[Controller_ForestArea.getHeight()][Controller_ForestArea.getWidth()];
+        Controller_ForestArea.updatePropWithTab();
+        
+        for(int i=0; i<Controller_ForestArea.getHeight(); i++) {
+            this.gbc.gridy = i;
+            
+            for(int j=0; j<Controller_ForestArea.getWidth(); j++) {
+                this.gbc.gridx = j;
+                
+                switch(Controller_ForestArea.getForestAreaTab()[i][j]) {
+                    case 0 : this.Cells[i][j] = new View_Cell(i, j, Enum_Cell.EMPTY.getColor());
+                        break;
+                    case 1 : this.Cells[i][j] = new View_Cell(i, j, Enum_Cell.YOUNG_PLANT.getColor());
+                        break;
+                    case 2 : this.Cells[i][j] = new View_Cell(i, j, Enum_Cell.SMALL_TREE.getColor());
+                        break;
+                    case 3 : this.Cells[i][j] = new View_Cell(i, j, Enum_Cell.ADULT_TREE.getColor());
+                        break;
+                    case 4 : this.Cells[i][j] = new View_Cell(i, j, Enum_Cell.FIRE.getColor());
+                        break;
+                    case 5 : this.Cells[i][j] = new View_Cell(i, j, Enum_Cell.INFECT.getColor());
+                        break;
+                    case 6 : this.Cells[i][j] = new View_Cell(i, j, Enum_Cell.ASH.getColor());
+                        break;
+                }
+                
+                this.add(this.Cells[i][j], this.gbc);
+            }
+        }
+        this.revalidate();
+        this.repaint();
     }
     
     public void updateGrid() {
         
-        this.removeAll();   
         Controller_ForestArea.updatePropWithTab();
         
         for(int i=0; i<Controller_ForestArea.getHeight(); i++) {
@@ -56,69 +95,68 @@ public class View_ForestArea extends JPanel{
                 this.gbc.gridx = j;
 
                 switch(Controller_ForestArea.getForestAreaTab()[i][j]) {
-                    case 0 : this.add(new View_Cell_Empty(i, j), this.gbc);
+                    
+                    case 0 : this.Cells[i][j].setBackground(Enum_Cell.EMPTY.getColor());
                         break;
-                    case 1 : this.add(new View_Tree_YoungPlant(i, j), this.gbc);
+                    case 1 : this.Cells[i][j].setBackground(Enum_Cell.YOUNG_PLANT.getColor());
                         break;
-                    case 2 : this.add(new View_Tree_SmallTree(i, j), this.gbc);
+                    case 2 : this.Cells[i][j].setBackground(Enum_Cell.SMALL_TREE.getColor());
                         break;
-                    case 3 : this.add(new View_Tree_AdultTree(i, j), this.gbc);
+                    case 3 : this.Cells[i][j].setBackground(Enum_Cell.ADULT_TREE.getColor());
                         break;
-                    case 4 : this.add(new View_Tree_Fire(i, j), this.gbc);
+                    case 4 : this.Cells[i][j].setBackground(Enum_Cell.FIRE.getColor());
                         break;
-                    case 5 : this.add(new View_Tree_Infect(i, j), this.gbc);
+                    case 5 : this.Cells[i][j].setBackground(Enum_Cell.INFECT.getColor());
                         break;
-                    case 6 : this.add(new View_Cell_Ash(i, j), this.gbc);
+                    case 6 : this.Cells[i][j].setBackground(Enum_Cell.ASH.getColor());
                         break;
                 }
 
             }
         }
-        this.revalidate();
-        this.repaint();
+        System.out.println("eslez");
+        //this.revalidate();
+        
         
         
     }
     
     public void setCellAt(int x, int y, int cell) {
             System.err.println(" X : " + x);
-            
-            this.gbc.gridx = x;
-            this.gbc.gridy = y;
 
                 switch(cell) {
                     case 0 :
                         Controller_ForestArea.setForestAreaTabAt(x, y, 0);
-                        this.add(new View_Cell_Empty(x, y), this.gbc);
+                        this.Cells[x][y].setBackground(Color.WHITE);
                         break;
                     case 1 :
                         Controller_ForestArea.setForestAreaTabAt(x, y, 1);
-                        this.add(new View_Tree_YoungPlant(x, y), this.gbc);
+                        this.Cells[x][y].setBackground(Color.BLUE);
                         break;
                     case 2 :
                         Controller_ForestArea.setForestAreaTabAt(x, y, 2);
-                        this.add(new View_Tree_SmallTree(x, y), this.gbc);
+                        this.Cells[x][y].setBackground(Color.GREEN);
                         break;
                     case 3 :
                         Controller_ForestArea.setForestAreaTabAt(x, y, 3);
-                        this.add(new View_Tree_AdultTree(x, y), this.gbc);
+                        this.Cells[x][y].setBackground(Color.CYAN);
                         break;
                     case 4 :
                         Controller_ForestArea.setForestAreaTabAt(x, y, 4);
-                        this.add(new View_Tree_Fire(x, y), this.gbc);
+                        this.Cells[x][y].setBackground(Color.WHITE);
                         break;
                     case 5 :
                         Controller_ForestArea.setForestAreaTabAt(x, y, 5);
-                        this.add(new View_Tree_Infect(x, y), this.gbc);
+                        this.Cells[x][y].setBackground(Color.WHITE);
                         break;
                     case 6 :
                         Controller_ForestArea.setForestAreaTabAt(x, y, 6);
-                        this.add(new View_Cell_Ash(x, y), this.gbc);
+                        this.Cells[x][y].setBackground(Color.WHITE);
                         break;
                 }
             
-            this.revalidate();
-            //this.repaint(); 
+            //this.revalidate();
+            this.repaint(); 
             View_StatMenu.updateLabelStat();
     }
 

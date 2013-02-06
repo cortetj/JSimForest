@@ -74,7 +74,7 @@ public class Window_NewForest extends JFrame {
                 Controller_ForestArea.setStep(0);
 
                 parent.setWindow_title("JSimForest - " + Controller_ForestArea.getName());
-                parent.updateForest();
+                parent.newForest();
                 dispose();
           }
         });

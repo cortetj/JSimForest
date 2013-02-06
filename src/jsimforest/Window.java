@@ -4,15 +4,11 @@
  */
 package jsimforest;
 
-import fr.jsimforest.controller.Controller_ForestArea;
 import fr.jsimforest.view.View_ActionMenu;
 import fr.jsimforest.view.View_ForestArea;
 import fr.jsimforest.view.View_StatMenu;
 import fr.jsimforest.view.View_TreeMenu;
-import fr.jsimforest.view.View_Tree_YoungPlant;
 import java.awt.BorderLayout;
-import java.util.Timer;
-import java.util.TimerTask;
 import javax.swing.*;
 /**
  *
@@ -80,6 +76,11 @@ public class Window extends JFrame{
 
     public void forestAreaZoomOut() {
         this.forestArea.zoomout();
+    }
+
+    void newForest() {
+        this.forestArea.createGrid();
+        View_StatMenu.updateLabelStat();
     }
 
 
