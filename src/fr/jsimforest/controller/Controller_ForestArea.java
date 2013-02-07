@@ -28,34 +28,12 @@ public class Controller_ForestArea {
         
         private static int statut;
 
-
         
     public Controller_ForestArea() {
 
-        this.statut = 1;
-        this.name = "Default Forest";
-        this.step = 0;
-        
-//        int fo[][] = {{1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 0, 0, 1, 0, 0},
-//                  {1, 3, 2, 2, 2, 0, 1, 0, 0, 1, 0, 0, 3, 0, 0, 1, 3, 0},
-//                  {3, 1, 1, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 3, 0, 1},
-//                  {1, 3, 1, 2, 0, 0, 1, 0, 0, 1, 3, 0, 1, 0, 0, 0, 0, 0},
-//                  {1, 0, 0, 2, 2, 0, 1, 0, 0, 3, 0, 0, 3, 0, 0, 1, 3, 0},
-//                  {0, 1, 1, 0, 0, 0, 0, 1, 2, 0, 0, 1, 0, 0, 3, 3, 0, 1},
-//                  {1, 2, 0, 2, 0, 0, 1, 1, 2, 1, 3, 0, 1, 1, 2, 1, 0, 0},
-//                  {1, 2, 3, 2, 2, 0, 1, 2, 3, 0, 0, 0, 3, 3, 2, 3, 3, 0},
-//                  {0, 1, 1, 0, 0, 0, 3, 2, 2, 0, 0, 1, 0, 0, 0, 3, 0, 1},
-//                  {1, 0, 0, 2, 0, 0, 1, 0, 0, 1, 3, 0, 1, 0, 0, 1, 0, 0},
-//                  {1, 0, 0, 2, 2, 0, 1, 0, 0, 1, 0, 0, 3, 0, 0, 0, 3, 0},
-//                  {1, 3, 1, 2, 0, 0, 1, 0, 0, 1, 3, 0, 1, 0, 0, 0, 0, 0},
-//                  {1, 0, 0, 2, 2, 0, 1, 0, 0, 3, 0, 0, 3, 0, 0, 1, 3, 0},
-//                  {0, 1, 1, 0, 0, 0, 0, 1, 2, 0, 0, 1, 0, 0, 3, 3, 0, 1},
-//                  {1, 2, 0, 2, 0, 0, 1, 1, 2, 1, 3, 0, 1, 1, 2, 1, 0, 0},
-//                  {1, 2, 3, 2, 2, 0, 1, 2, 3, 0, 0, 0, 3, 3, 2, 3, 3, 0},
-//                  {0, 1, 1, 0, 0, 0, 3, 2, 2, 0, 0, 1, 0, 0, 0, 3, 0, 1},
-//                  {1, 0, 0, 2, 0, 0, 1, 0, 0, 1, 3, 0, 1, 0, 0, 1, 0, 0},
-//                  {1, 0, 0, 2, 2, 0, 1, 0, 0, 1, 0, 0, 3, 0, 0, 0, 3, 0},
-//                  {0, 1, 1, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 3, 0, 1}};
+        Controller_ForestArea.statut = 1;
+        Controller_ForestArea.name = "Default Forest";
+        Controller_ForestArea.step = 0;
         
         int fo[][] = new int[40][40];
         for(int i=0; i<fo[0].length;i++) {
@@ -65,28 +43,8 @@ public class Controller_ForestArea {
         }
         
         Controller_ForestArea.ForestAreaTab = fo;
-        this.updatePropWithTab();
-        
-//       System.out.println(" ---------- BEFORE -------");
-//       for(int i=0; i<Controller_ForestArea.getHeight(); i++) {
-//            for(int j=0; j<Controller_ForestArea.getWidth(); j++) {
-//                System.out.print(Controller_ForestArea.getForestAreaTab()[i][j]);
-//            }
-//                System.out.println("");
-//        }
-//        System.out.println("");
-//       
-//        this.moore.evolutionArea();
-//        
-//        System.out.println(" ---------- AFTER -------");
-//       for(int i=0; i<Controller_ForestArea.getHeight(); i++) {
-//            for(int j=0; j<Controller_ForestArea.getWidth(); j++) {
-//                System.out.print(Controller_ForestArea.getForestAreaTab()[i][j]);
-//            }
-//                System.out.println("");
-//        }
-//        System.out.println("");
-        
+        this.updatePropWithTab();  
+        System.out.println(this.TabToString());
     }
     
     public static void defautTab(int width, int height, String name) {
@@ -160,7 +118,19 @@ public class Controller_ForestArea {
         }
 
     }
-        
+
+    public String TabToString()
+    {
+        String str = new String();
+        for (int i = 0; i<Controller_ForestArea.getHeight(); i++) {
+            for (int j = 0; j<Controller_ForestArea.getWidth(); j++) {
+                str += Controller_ForestArea.getForestAreaTab()[i][j];
+            }
+            str += "n";
+        }
+        str = str.substring(0, str.length()-1);
+        return str;
+    }
         
     /**
      * @return the width

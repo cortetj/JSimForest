@@ -23,12 +23,12 @@ public enum Enum_Cell {
       
      private Color Cell_color; 
      private int Cell_ref; 
-      
+
      private Enum_Cell(Color color, int ref) {  
          this.Cell_color = color; 
          this.Cell_ref = ref;
-    }  
-      
+    }
+    
     public Color getColor() {  
          return  this.Cell_color;  
     }

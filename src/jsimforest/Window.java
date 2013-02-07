@@ -41,7 +41,7 @@ public class Window extends JFrame{
         this.Menu_action = new View_ActionMenu(this);
         this.getContentPane().add(this.Menu_action, BorderLayout.NORTH);
         
-        this.Menu_tree = new View_TreeMenu();
+        this.Menu_tree = new View_TreeMenu(this);
         this.getContentPane().add(this.Menu_tree, BorderLayout.WEST);
         
         this.Menu_stat = new View_StatMenu();
@@ -58,8 +58,12 @@ public class Window extends JFrame{
     }
     
     public void updateForest() {
-        this.forestArea.updateGrid();
+        this.forestArea.updateGridColors();
         View_StatMenu.updateLabelStat();
+    }
+    
+    public void updateBorder() {
+        this.forestArea.updateGridBorder();
     }
 
     /**
