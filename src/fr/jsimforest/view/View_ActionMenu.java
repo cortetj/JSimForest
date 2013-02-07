@@ -12,10 +12,14 @@ import java.awt.GridLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JPanel;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 import jsimforest.Window;
 import jsimforest.Window_LoadForest;
 import jsimforest.Window_NewForest;
@@ -41,19 +45,19 @@ public class View_ActionMenu extends JPanel{
     
     
     public View_ActionMenu(final Window parent) {
-        
+
         JPanel separator = new JPanel();
         separator.setOpaque(false);
         JPanel lb = new JPanel();
         lb.setOpaque(false);
-        lb.setLayout(new GridLayout(1,5, 0, 0));
+        //lb.setLayout(new GridLayout(1,5, 0, 0));
         JPanel rb = new JPanel();
         rb.setLayout(new GridLayout(1,6, 0, 0));
         rb.setOpaque(false);
          
         this.player = new Controller_Player(parent);
         //this.setBorder(BorderFactory.createLineBorder(Color.black, 1)); 
-        this.setPreferredSize(new Dimension(0,45));
+        this.setPreferredSize(new Dimension(0,40));
         this.setBackground(Color.decode("#2c2c2c"));
         
         this.setLayout(new BorderLayout());
@@ -62,8 +66,9 @@ public class View_ActionMenu extends JPanel{
         this.Button_new = new JButton(Ico_new);
         this.Button_new.setOpaque(false);
         this.Button_new.setBorderPainted(false);
+        this.Button_new.setContentAreaFilled(false);
+        this.Button_new.setPreferredSize(new Dimension(71, 31));
         //this.Button_new.setBackground(Color.decode("#A9A9A9"));
-        this.Button_new.setForeground(Color.white);
         this.Button_new.addActionListener(new ActionListener() {
           @Override
           public void actionPerformed(ActionEvent evt) {
@@ -75,6 +80,8 @@ public class View_ActionMenu extends JPanel{
         this.Button_open = new JButton(Ico_open);
         this.Button_open.setOpaque(false);
         this.Button_open.setBorderPainted(false);
+        this.Button_open.setPreferredSize(new Dimension(78, 31));
+        this.Button_open.setContentAreaFilled(false);
         this.Button_open.addActionListener(new ActionListener() {
           @Override
           public void actionPerformed(ActionEvent evt) {
@@ -86,16 +93,16 @@ public class View_ActionMenu extends JPanel{
         ImageIcon Ico_save = new ImageIcon("img/ico_save.png");        
         this.Button_save = new JButton(Ico_save);
         this.Button_save.setOpaque(false);
+        this.Button_save.setContentAreaFilled(false);
+        this.Button_save.setPreferredSize(new Dimension(78, 31));
         this.Button_save.setBorderPainted(false);
-        //this.Button_save.setBackground(Color.decode("#A9A9A9"));
-        this.Button_save.setForeground(Color.white);
 
         ImageIcon Ico_load = new ImageIcon("img/ico_load.png");        
         this.Button_load = new JButton(Ico_load);
         this.Button_load.setOpaque(false);
+        this.Button_load.setContentAreaFilled(false);
+        this.Button_load.setPreferredSize(new Dimension(78, 31));
         this.Button_load.setBorderPainted(false);
-        //this.Button_load.setBackground(Color.decode("#A9A9A9"));
-        this.Button_load.setForeground(Color.white);
         this.Button_load.addActionListener(new ActionListener() {
           @Override
           public void actionPerformed(ActionEvent evt) {
@@ -106,6 +113,8 @@ public class View_ActionMenu extends JPanel{
         ImageIcon Ico_play = new ImageIcon("img/ico_play.png"); 
         this.Button_play = new JButton(Ico_play);
         this.Button_play.setOpaque(false);
+        this.Button_play.setContentAreaFilled(false);
+        this.Button_play.setPreferredSize(new Dimension(40, 31));
         this.Button_play.setBorderPainted(false);
         this.Button_play.addActionListener(new ActionListener() {
           @Override
@@ -117,6 +126,8 @@ public class View_ActionMenu extends JPanel{
         ImageIcon Ico_pause = new ImageIcon("img/ico_pause.png"); 
         this.Button_pause = new JButton(Ico_pause);
         this.Button_pause.setOpaque(false);
+        this.Button_pause.setContentAreaFilled(false);
+        this.Button_pause.setPreferredSize(new Dimension(40, 31));
         this.Button_pause.setBorderPainted(false);
         this.Button_pause.addActionListener(new ActionListener() {
           @Override
@@ -129,6 +140,8 @@ public class View_ActionMenu extends JPanel{
         ImageIcon Ico_nf = new ImageIcon("img/ico_nextframe.png"); 
         this.Button_nf = new JButton(Ico_nf);
         this.Button_nf.setOpaque(false);
+        this.Button_nf.setContentAreaFilled(false);
+        this.Button_nf.setPreferredSize(new Dimension(40, 31));
         this.Button_nf.setBorderPainted(false);
         this.Button_nf.addActionListener(new ActionListener() {
           @Override
@@ -141,11 +154,15 @@ public class View_ActionMenu extends JPanel{
         ImageIcon Ico_fast = new ImageIcon("img/ico_fast.png"); 
         this.Button_fast = new JButton(Ico_fast);
         this.Button_fast.setOpaque(false);
+        this.Button_fast.setContentAreaFilled(false);
+        this.Button_fast.setPreferredSize(new Dimension(40, 31));
         this.Button_fast.setBorderPainted(false);
         
         ImageIcon Ico_zommin = new ImageIcon("img/ico_zoomin.png"); 
         this.Button_zoomin = new JButton(Ico_zommin);
         this.Button_zoomin.setOpaque(false);
+        this.Button_zoomin.setContentAreaFilled(false);
+        this.Button_zoomin.setPreferredSize(new Dimension(33, 31));
         this.Button_zoomin.setBorderPainted(false);
         this.Button_zoomin.addActionListener(new ActionListener() {
           @Override
@@ -157,6 +174,8 @@ public class View_ActionMenu extends JPanel{
         ImageIcon Ico_zoomout = new ImageIcon("img/ico_zoomout.png"); 
         this.Button_zoomout = new JButton(Ico_zoomout);
         this.Button_zoomout.setOpaque(false);
+        this.Button_zoomout.setContentAreaFilled(false);
+        this.Button_zoomout.setPreferredSize(new Dimension(35, 31));
         this.Button_zoomout.setBorderPainted(false);
         this.Button_zoomout.addActionListener(new ActionListener() {
           @Override
@@ -170,8 +189,8 @@ public class View_ActionMenu extends JPanel{
         lb.add(this.Button_save);
         lb.add(this.Button_load);
          
-        rb.add(this.Button_play);
         rb.add(this.Button_pause);
+        rb.add(this.Button_play);
         rb.add(this.Button_nf);
         rb.add(this.Button_fast);
         rb.add(separator);
