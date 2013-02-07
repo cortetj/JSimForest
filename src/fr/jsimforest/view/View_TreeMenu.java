@@ -89,15 +89,15 @@ public class View_TreeMenu extends JPanel {
 
         //this.setBorder(BorderFactory.createLineBorder(Color.black, 1));  
         this.setPreferredSize(new Dimension(150,0));
-        this.setBackground(Color.decode("#EEEEEE"));
+        this.setBackground(Color.decode("#DDDDDD"));
 
         this.add(new JLabel(" MENU "));
         
         this.add(new JLabel(" Trees : "));
         this.add(this.Button_empty);
-        //this.add(this.Button_yp);
-        //this.add(this.Button_st);
-        //this.add(this.Button_at);
+        this.add(this.Button_yp);
+        this.add(this.Button_st);
+        this.add(this.Button_at);
 
         this.add(new JLabel(""));
         
