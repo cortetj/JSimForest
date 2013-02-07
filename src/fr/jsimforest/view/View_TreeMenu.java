@@ -89,7 +89,7 @@ public class View_TreeMenu extends JPanel {
 
         //this.setBorder(BorderFactory.createLineBorder(Color.black, 1));  
         this.setPreferredSize(new Dimension(150,0));
-        this.setBackground(Color.decode("#DDDDDD"));
+        this.setBackground(Color.decode("#EEEEEE"));
 
         this.add(new JLabel(" MENU "));
         
