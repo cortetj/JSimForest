@@ -11,15 +11,14 @@ import java.util.ArrayList;
  * @author raff
  */
 public class Controller_Moore {
-    private int x;
-    private int y;
     
-    public Controller_Moore(int x, int y){
-        this.x=x;
-        this.y=y;
-    }
+  private Enum_Mode mode;
+  
+  Controller_Moore(){
+  }
+
     
-    private int[] NeighboorMoor(int forestArea[][], int y, int x){
+   /* private int[] NeighboorMoor(int forestArea[][], int y, int x){
         // Test pour 8 voisins
         //int table[]=new int[5];
         
@@ -29,7 +28,7 @@ public class Controller_Moore {
         }*/
        // if(y-1<0 && y+1)
         
-        if(y>0 && y<forestArea.length && x>0 && x<forestArea.length){
+     /*   if(y>0 && y<forestArea.length && x>0 && x<forestArea.length){
            int neighboor[]={forestArea[y][x+1], forestArea[y][x-1], forestArea[y-1][x-1], forestArea[y+1][x-1], forestArea[y+1][x], forestArea[y-1][x], forestArea[y-1][x+1], forestArea[y+1][x+1]};
            return neighboor;
         }
@@ -70,12 +69,13 @@ public class Controller_Moore {
         }
         int defaut[]=null;
         return defaut;
-    }
-     public ArrayList<Integer> getVoisinMoore(int _x, int _y, int[][] forestArea) {
+    }*/
+    
+     public ArrayList<Integer> getVoisinMoore(int _y, int _x, int[][] forestArea) {
         // int[] neighboor=null;
          ArrayList<Integer> neighboor=new ArrayList<Integer>();
         //ArrayList<Case> voisins = new ArrayList<Case>();
-        if (_y < 0 || _y >= y || _x < 0 || _x >= x) {
+        if (_y < 0 || _y >= forestArea.length || _x < 0 || _x >= forestArea[0].length) {
             return neighboor;
         } else {
             if (_x - 1 >= 0) {
@@ -83,16 +83,16 @@ public class Controller_Moore {
                 if (_y - 1 >= 0) {
                  neighboor.add(forestArea[_y-1][_x-1]);
                 }
-                if (_y + 1 < y) {
+                if (_y + 1 < forestArea.length) {
                    neighboor.add(forestArea[_y+1][_x-1]);
                 }
             }
-            if (_x + 1 < x) {
+            if (_x + 1 < forestArea[0].length) {
                 neighboor.add(forestArea[_y][_x+1]);//voisins.add(getCase(_x + 1, _y));
                 if (_y - 1 >= 0) {
                 neighboor.add(forestArea[_y-1][_x+1]);;  //  voisins.add(getCase(_x + 1, _y - 1));
                 }
-                if (_y + 1 < y) {
+                if (_y + 1 < forestArea.length) {
                 neighboor.add(forestArea[_y+1][_x+1]);//    voisins.add(getCase(_x + 1, _y + 1));
                 }
             }
@@ -100,7 +100,7 @@ public class Controller_Moore {
                 neighboor.add(forestArea[_y-1][_x]);
                 //voisins.add(getCase(_x, _y - 1));
             }
-            if (_y + 1 < y) {
+            if (_y + 1 < forestArea.length) {
                 neighboor.add(forestArea[_y+1][_x]);
                 //voisins.add(getCase(_x, _y + 1));
             }
@@ -141,11 +141,17 @@ public class Controller_Moore {
                     break;
                 case 6:
                     count[6]++;
-                    break; 
+                    break;
+                case 7:
+                    count[2]++;
+                    break;
             }
             
         //list_neigh = NeighboorMoor(forestArea, y, x);
         //NeighBoorMoor(forestArea, y, x);
+        }
+        if(type==7){
+            type=2;
         }
         return count[type];
         /*switch(type){
@@ -164,19 +170,106 @@ public class Controller_Moore {
             case 6:
                return count[6]; 
         }
+        * s
         return 0;*/
     }
+    private Enum_Mode returnMode(int forestArea[][], int y, int x){
+          if(CountTypeNeighboor(forestArea, y, x, 4)>0){
+              return mode.MODE_FIRE;
+          }
+          else if(CountTypeNeighboor(forestArea, y, x, 5)>0){
+              return mode.MODE_INFECTED;
+          }
+          else{
+            return mode.MODE_GROWTH;}
+    }
+        private int setStateGrowth(int forestArea[][], int y, int x){
+            int nbTree=CountTypeNeighboor(forestArea, y, x, 3);
+            int nbYoungTree=CountTypeNeighboor(forestArea, y, x, 2)+CountTypeNeighboor(forestArea, y, x, 7);
+            
+            switch(forestArea[y][x]){
+                case 0:
+                    if ( nbTree >= 2 || nbYoungTree >= 3 || (nbTree == 1 && nbYoungTree == 2)) {
+                        return 1;
+                    }
+                    break;
+                case 1:
+                    if ( nbTree+nbYoungTree<=3) {
+                        return 2;
+                    }
+                    break;
+                case 2:
+                    return 7;
+                case 3:
+                    break;
+                case 4:
+                    break;
+                case 5:
+                    break;
+                case 6:
+                    break;
+                case 7:
+                    return 3;
+        }
+            return 0;
+        }
+        private void setStateFire(int forestArea[][], int y, int x){
+            
+        }
+        private void setStateInfected(int forestArea[][], int y, int x){
+            
+        }
+    public int[][] changeCell(int forestArea[][], int y, int x){
+        
+
+        this.mode=returnMode(forestArea, y, x);
+        
+        switch(mode){
+            case MODE_FIRE:
+               setStateFire(forestArea, y, x);
+                break;
+            case MODE_INFECTED:
+                setStateInfected(forestArea, y, x);
+                break;
+            case MODE_GROWTH:
+                forestArea[y][x]=setStateGrowth(forestArea, y, x);
+                return forestArea;
+        }
+        
     
-    public int[][] changeCell(int forestArea[][], int tempforestArea[][], int y, int x){
-        /*   rappel code état : vide=0
-         *                      jeune pousse=1
-         *                      arbustre=2
-         *                      arbre=3 
-         *                      feu=4 
-         *                      cendre=5 
-         *                      infecte=6
+        
+        
+
+        /*            code State :  empty=0
+         *                          young plant=1
+         *                          young tree=2
+         *                          tree =3 
+         *                          feu =4 
+         *                          cendre =5 
+         *                          infected =6
+         *                          young oldtree =7
          */
-       if(tempforestArea[y][x]==5){
+        // int tempforestArea[][]=forestArea;
+     /*
+        switch(getVoisinMoore(y, x, tempforestArea).get(i)){
+            case 0:
+                break;
+            case 1:
+                break;
+            case 2:
+                break;
+            case 3:
+                break;
+            case 4:
+                break;
+            case 5:
+                break;
+            case 6:
+                break;
+            case 7:
+                break;   
+        }*/
+     /*  if(tempforestArea[y][x]==5){
            forestArea[y][x]=0;
        }
        else if(tempforestArea[y][x]==4){
@@ -186,13 +279,7 @@ public class Controller_Moore {
            forestArea[y][x]=0;
        }
        else if(tempforestArea[y][x]==0){
-           if(CountTypeNeighboor(tempforestArea, y, x, 3)>=2){
-               forestArea[y][x]=1;
-           }
-           else if(CountTypeNeighboor(tempforestArea, y, x, 2)>=3){
-               forestArea[y][x]=1;
-           }
-           else if(CountTypeNeighboor(tempforestArea, y, x, 3)==1 && CountTypeNeighboor(tempforestArea, y, x, 2)==2){
+           if(CountTypeNeighboor(tempforestArea, y, x, 3)>=2 || CountTypeNeighboor(tempforestArea, y, x, 2)>=3 || CountTypeNeighboor(tempforestArea, y, x, 3)==1 && CountTypeNeighboor(tempforestArea, y, x, 2)==2){
                forestArea[y][x]=1;
            }
        }
@@ -221,7 +308,7 @@ public class Controller_Moore {
                    forestArea[y][x]=4;
                }
            }
-       }
+       }*/
        return forestArea;
        //Risque d'infection -> METHODE DE VOISINAGE A CHANGER
        /*if(CountTypeNeighboor(tempforestArea, y, x, 6)>=1){
@@ -247,9 +334,9 @@ public class Controller_Moore {
              
             int temp[][]=Controller_ForestArea.getForestAreaTab();
 
-            for(int i=0; i<temp.length-1;i++){
-                for(int j=0; j<temp[0].length-1;j++){
-                    temp=changeCell(temp, temp, i, j);
+            for(int i=0; i<temp.length;i++){
+                for(int j=0; j<temp[0].length;j++){
+                    temp=changeCell(temp, i, j);
                 }
             }
             Controller_ForestArea.setForestAreaTab(temp); 

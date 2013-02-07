@@ -151,6 +151,9 @@ public class Controller_ForestArea {
                      case 6 : 
                         Controller_ForestArea.setNbr_ash(Controller_ForestArea.getNbr_ash() + 1);
                         break;
+                     case 7 :
+                         Controller_ForestArea.setNbr_st(Controller_ForestArea.getNbr_st() + 1);
+                        break;
                 }
                 
             }            
