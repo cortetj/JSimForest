@@ -5,7 +5,6 @@
 package fr.jsimforest.view;
 
 import fr.jsimforest.controller.Controller_Cell;
-import fr.jsimforest.controller.Controller_ForestArea;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.MouseEvent;
@@ -44,7 +43,13 @@ public class View_Cell extends JPanel implements MouseListener {
 
     @Override
     public void mouseExited(MouseEvent e) {
-        this.setBorder(BorderFactory.createLineBorder(Color.BLACK, 1));
+        if(View_ForestArea.isMap_border()) {
+            this.setBorder(BorderFactory.createLineBorder(Color.BLACK, 1));
+        }
+        else {
+            this.setBorder(null);
+        }
+        
 
     }
 
