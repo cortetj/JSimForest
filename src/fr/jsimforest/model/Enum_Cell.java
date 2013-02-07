@@ -19,15 +19,15 @@ public enum Enum_Cell {
     FIRE(Color.decode("#E0AF1B"), 4), 
     INFECT(Color.decode("#E01BD9"), 5), 
     ASH(Color.decode("#DDDDDD"), 6);  
-      
+
      private Color Cell_color; 
      private int Cell_ref; 
-      
+
      private Enum_Cell(Color color, int ref) {  
          this.Cell_color = color; 
          this.Cell_ref = ref;
-    }  
-      
+    }
+    
     public Color getColor() {  
          return  this.Cell_color;  
     }

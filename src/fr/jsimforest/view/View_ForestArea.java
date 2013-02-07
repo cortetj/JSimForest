@@ -11,6 +11,7 @@ import jsimforest.Window;
 import java.awt.Color;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import javax.swing.BorderFactory;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
@@ -19,15 +20,20 @@ import javax.swing.SwingUtilities;
  * @author EggMan
  */
 public class View_ForestArea extends JPanel{
+
     
     private GridBagLayout gbl;
     private GridBagConstraints gbc;
     private View_Cell Cells[][];
     private Window parent;
-    
+    private static boolean map_border;
+
+            
     public View_ForestArea(Window win) {
                 
         this.parent = win;
+        View_ForestArea.map_border = true;
+        
         Controller_ForestArea ctr = new Controller_ForestArea();
         
         View_Cell.setCell_height(12);
@@ -82,18 +88,14 @@ public class View_ForestArea extends JPanel{
         this.repaint();
     }
     
-    public void updateGrid() {
+    public void updateGridColors() {
         
         Controller_ForestArea.updatePropWithTab();
         
         for(int i=0; i<Controller_ForestArea.getHeight(); i++) {
-            
-            this.gbc.gridy = i;
-            
+                        
             for(int j=0; j<Controller_ForestArea.getWidth(); j++) {
                 
-                this.gbc.gridx = j;
-
                 switch(Controller_ForestArea.getForestAreaTab()[i][j]) {
                     
                     case 0 : this.Cells[i][j].setBackground(Enum_Cell.EMPTY.getColor());
@@ -114,44 +116,58 @@ public class View_ForestArea extends JPanel{
 
             }
         }
-        System.out.println("eslez");
         //this.revalidate();
         
         
         
     }
+
+    public void updateGridBorder() {
+        
+        Controller_ForestArea.updatePropWithTab();
+        
+        for(int i=0; i<Controller_ForestArea.getHeight(); i++) {
+                       
+            for(int j=0; j<Controller_ForestArea.getWidth(); j++) {
+                if(View_ForestArea.isMap_border()) {
+                    this.Cells[i][j].setBorder(BorderFactory.createLineBorder(Color.BLACK, 1));
+                }
+                else {this.Cells[i][j].setBorder(null);} 
+            }
+        }        
+        
+    }
     
     public void setCellAt(int x, int y, int cell) {
-            System.err.println(" X : " + x);
 
                 switch(cell) {
                     case 0 :
                         Controller_ForestArea.setForestAreaTabAt(x, y, 0);
-                        this.Cells[x][y].setBackground(Color.WHITE);
+                        this.Cells[x][y].setBackground(Enum_Cell.EMPTY.getColor());
                         break;
                     case 1 :
                         Controller_ForestArea.setForestAreaTabAt(x, y, 1);
-                        this.Cells[x][y].setBackground(Color.BLUE);
+                        this.Cells[x][y].setBackground(Enum_Cell.YOUNG_PLANT.getColor());
                         break;
                     case 2 :
                         Controller_ForestArea.setForestAreaTabAt(x, y, 2);
-                        this.Cells[x][y].setBackground(Color.GREEN);
+                        this.Cells[x][y].setBackground(Enum_Cell.SMALL_TREE.getColor());
                         break;
                     case 3 :
                         Controller_ForestArea.setForestAreaTabAt(x, y, 3);
-                        this.Cells[x][y].setBackground(Color.CYAN);
+                        this.Cells[x][y].setBackground(Enum_Cell.ADULT_TREE.getColor());
                         break;
                     case 4 :
                         Controller_ForestArea.setForestAreaTabAt(x, y, 4);
-                        this.Cells[x][y].setBackground(Color.WHITE);
+                        this.Cells[x][y].setBackground(Enum_Cell.FIRE.getColor());
                         break;
                     case 5 :
                         Controller_ForestArea.setForestAreaTabAt(x, y, 5);
-                        this.Cells[x][y].setBackground(Color.WHITE);
+                        this.Cells[x][y].setBackground(Enum_Cell.INFECT.getColor());
                         break;
                     case 6 :
                         Controller_ForestArea.setForestAreaTabAt(x, y, 6);
-                        this.Cells[x][y].setBackground(Color.WHITE);
+                        this.Cells[x][y].setBackground(Enum_Cell.ASH.getColor());
                         break;
                 }
             
@@ -161,19 +177,51 @@ public class View_ForestArea extends JPanel{
     }
 
     public void zoomin() {
-        View_Cell.setCell_height(View_Cell.getCell_height() + 2);
-        View_Cell.setCell_width(View_Cell.getCell_width() + 2);
         
-        this.updateGrid();
+        if (View_Cell.getCell_height() <= 8) {
+            
+            View_Cell.setCell_height(View_Cell.getCell_height() + 1);
+            View_Cell.setCell_width(View_Cell.getCell_width() + 1);
+        }
+        
+        else if (View_Cell.getCell_height() > 8) {
+            
+            View_Cell.setCell_height(View_Cell.getCell_height() + 2);
+            View_Cell.setCell_width(View_Cell.getCell_width() + 2);
+        }
+        
+        this.createGrid();
     }
 
     public void zoomout() {
-        if (View_Cell.getCell_height() > 2 && View_Cell.getCell_width() > 2) {
+        System.out.println(View_Cell.getCell_height());
+        if (View_Cell.getCell_height() > 1 && View_Cell.getCell_height() <= 8) {
+            
+            View_Cell.setCell_height(View_Cell.getCell_height() - 1);
+            View_Cell.setCell_width(View_Cell.getCell_width() - 1);
+        }
+        else if (View_Cell.getCell_height() > 8) {
             
             View_Cell.setCell_height(View_Cell.getCell_height() - 2);
             View_Cell.setCell_width(View_Cell.getCell_width() - 2);
         }
         
-        this.updateGrid();
+        this.createGrid();
+
     }
+    
+    /**
+     * @return the map_border
+     */
+    public static boolean isMap_border() {
+        return map_border;
+    }
+
+    /**
+     * @param aMap_border the map_border to set
+     */
+    public static void setMap_border(boolean aMap_border) {
+        map_border = aMap_border;
+    }
+    
 }

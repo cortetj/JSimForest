@@ -49,7 +49,10 @@ public class View_Cell extends JPanel implements MouseListener {
     }
 
     @Override
-    public void mousePressed(MouseEvent e) {}
+    public void mousePressed(MouseEvent e) {
+        View_ForestArea fa = (View_ForestArea) getParent();
+        fa.setCellAt(this.x, this.y, Controller_Cell.getSelected_tree());
+    }
 
     @Override
     public void mouseReleased(MouseEvent e) {}
@@ -57,17 +60,8 @@ public class View_Cell extends JPanel implements MouseListener {
     @Override
     public void mouseClicked(MouseEvent e) {
         
-        View_ForestArea fa = (View_ForestArea) getParent();
-        fa.setCellAt(this.x, this.y, Controller_Cell.getSelected_tree());
-        fa.updateGrid();
 
-//       for(int i=0; i<Controller_ForestArea.getHeight(); i++) {
-//            for(int j=0; j<Controller_ForestArea.getWidth(); j++) {
-//                System.out.print(Controller_ForestArea.getForestAreaTab()[i][j]);
-//            }
-//                System.out.println("");
-//        }
-//        System.out.println("");
+
     }
 
     /**

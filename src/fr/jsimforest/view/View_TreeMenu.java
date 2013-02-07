@@ -5,15 +5,16 @@
 package fr.jsimforest.view;
 
 import fr.jsimforest.controller.Controller_Cell;
-import fr.jsimforest.controller.Controller_ForestArea;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import jsimforest.Window;
 
 /**
  *
@@ -22,13 +23,16 @@ import javax.swing.JPanel;
 public class View_TreeMenu extends JPanel {
 
     private static int selected_tree;
+    
     private JButton Button_empty;
     private JButton Button_yp;
     private JButton Button_st;
     private JButton Button_at;
+    
+    private JCheckBox Check_Border;
 
 
-    public View_TreeMenu() {
+    public View_TreeMenu(final Window parent) {
 
         JLabel separator = new JLabel();
         separator.setText("");
@@ -65,17 +69,33 @@ public class View_TreeMenu extends JPanel {
                 Controller_Cell.setSelected_tree(3);
           }
         });
+        
+        this.Check_Border = new JCheckBox("Border", null, true);
+        this.Check_Border.addActionListener(new ActionListener() {
+          @Override
+          public void actionPerformed(ActionEvent evt) {
+                View_ForestArea.setMap_border(Check_Border.isSelected());
+                parent.updateBorder();
+          }
+        });
+        
 
         //this.setBorder(BorderFactory.createLineBorder(Color.black, 1));  
         this.setPreferredSize(new Dimension(150,0));
         this.setBackground(Color.decode("#BBBBBB"));
 
         this.add(new JLabel(" MENU "));
+        
         this.add(new JLabel(" Trees : "));
         this.add(this.Button_empty);
         this.add(this.Button_yp);
         this.add(this.Button_st);
         this.add(this.Button_at);
+
+        this.add(new JLabel(""));
+        
+        this.add(new JLabel(" Preference : "));
+        this.add(this.Check_Border);
     }
     
 }
