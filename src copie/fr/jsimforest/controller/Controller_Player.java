@@ -4,8 +4,6 @@
  */
 package fr.jsimforest.controller;
 
-import org.jfree.chart.*;
-import fr.jsimforest.view.View_Stats;
 import java.util.Timer;
 import java.util.TimerTask;
 import jsimforest.Window;
@@ -37,7 +35,6 @@ public class Controller_Player {
                 moore.evolutionArea();
                 Controller_ForestArea.setStep(Controller_ForestArea.getStep()+1);
                 System.out.println(Controller_ForestArea.getStep());
-                View_Stats.addStatRow();
             
         }
         
