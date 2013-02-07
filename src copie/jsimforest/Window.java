@@ -4,13 +4,11 @@
  */
 package jsimforest;
 
-import fr.jsimforest.view.View_Stats;
 import fr.jsimforest.view.View_ActionMenu;
 import fr.jsimforest.view.View_ForestArea;
 import fr.jsimforest.view.View_StatMenu;
 import fr.jsimforest.view.View_TreeMenu;
 import java.awt.BorderLayout;
-import java.awt.ComponentOrientation;
 import javax.swing.*;
 /**
  *
@@ -22,8 +20,6 @@ public class Window extends JFrame{
     private View_ActionMenu Menu_action;
     private View_TreeMenu Menu_tree;
     private View_StatMenu Menu_stat;
-    private View_Stats Tab_stat;
-    private JTabbedPane tab;
                      
     public Window() {
         
@@ -33,20 +29,13 @@ public class Window extends JFrame{
         
         this.getContentPane().setLayout(new BorderLayout());
        
-        this.forestArea = new View_ForestArea(this);
-        this.tab = new JTabbedPane(JTabbedPane.TOP);
-        this.tab.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
         JPanel forestArea_zone = new JPanel(new BorderLayout());
-        this.Tab_stat = new View_Stats();
-        
+        this.forestArea = new View_ForestArea(this);
         
         JScrollPane scroll = new JScrollPane(this.forestArea);
         scroll.getVerticalScrollBar().setUnitIncrement(16);
         scroll.getHorizontalScrollBar().setUnitIncrement(16);
-        tab.add("Forest" ,scroll);
-        tab.add("Statistic", this.Tab_stat);
-        
-        forestArea_zone.add(tab);
+        forestArea_zone.add(scroll);
         this.add(forestArea_zone, BorderLayout.CENTER);
         
         this.Menu_action = new View_ActionMenu(this);

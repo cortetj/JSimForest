@@ -4,7 +4,6 @@
  */
 package jsimforest;
 
-import fr.jsimforest.model.Model_Connection;
 import javax.swing.JFrame;
 
 /**
@@ -19,8 +18,6 @@ public class Window_LoadForest extends JFrame {
         this.setSize(500, 500);
         this.setLocationRelativeTo(null);
         this.setVisible(true);
-        
-        Model_Connection connect = new Model_Connection();
     }
     
 }

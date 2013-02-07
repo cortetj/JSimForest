@@ -10,7 +10,6 @@ import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JLabel;
@@ -40,12 +39,6 @@ public class View_TreeMenu extends JPanel {
 
         this.setLayout(new GridLayout(22, 1));
         this.Button_empty = new JButton("Empty");
-        ImageIcon Ico_cell_empty = new ImageIcon("img/ico_cell_empty.png");        
-        this.Button_empty = new JButton(Ico_cell_empty);
-        this.Button_empty.setOpaque(false);
-        this.Button_empty.setBorderPainted(false);
-        this.Button_empty.setContentAreaFilled(false);
-        this.Button_empty.setPreferredSize(new Dimension(130, 34));
         this.Button_empty.addActionListener(new ActionListener() {
           @Override
           public void actionPerformed(ActionEvent evt) {
@@ -89,15 +82,15 @@ public class View_TreeMenu extends JPanel {
 
         //this.setBorder(BorderFactory.createLineBorder(Color.black, 1));  
         this.setPreferredSize(new Dimension(150,0));
-        this.setBackground(Color.decode("#EEEEEE"));
+        this.setBackground(Color.decode("#BBBBBB"));
 
         this.add(new JLabel(" MENU "));
         
         this.add(new JLabel(" Trees : "));
         this.add(this.Button_empty);
-        //this.add(this.Button_yp);
-        //this.add(this.Button_st);
-        //this.add(this.Button_at);
+        this.add(this.Button_yp);
+        this.add(this.Button_st);
+        this.add(this.Button_at);
 
         this.add(new JLabel(""));
         

@@ -7,6 +7,7 @@ package jsimforest;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
+
 /**
  *
  * @author EggMan
@@ -34,7 +35,7 @@ public class JSimForest {
        catch (IllegalAccessException e) {
           // handle exception
        }
+
         Window w = new Window();
-        
     }
 }
