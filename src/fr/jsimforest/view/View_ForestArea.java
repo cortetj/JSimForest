@@ -79,6 +79,8 @@ public class View_ForestArea extends JPanel{
                         break;
                     case 6 : this.Cells[i][j] = new View_Cell(i, j, Enum_Cell.ASH.getColor());
                         break;
+                    case 7 : this.Cells[i][j] = new View_Cell(i, j, Enum_Cell.SMALL_OLDTREE.getColor());
+                        break;
                 }
                 
                 this.add(this.Cells[i][j], this.gbc);
@@ -112,8 +114,9 @@ public class View_ForestArea extends JPanel{
                         break;
                     case 6 : this.Cells[i][j].setBackground(Enum_Cell.ASH.getColor());
                         break;
+                    case 7 : this.Cells[i][j].setBackground(Enum_Cell.SMALL_OLDTREE.getColor());
+                        break;
                 }
-
             }
         }
         //this.revalidate();
@@ -168,6 +171,10 @@ public class View_ForestArea extends JPanel{
                     case 6 :
                         Controller_ForestArea.setForestAreaTabAt(x, y, 6);
                         this.Cells[x][y].setBackground(Enum_Cell.ASH.getColor());
+                        break;
+                    case 7 :
+                        Controller_ForestArea.setForestAreaTabAt(x, y, 7);
+                        this.Cells[x][y].setBackground(Enum_Cell.SMALL_OLDTREE.getColor());
                         break;
                 }
             
