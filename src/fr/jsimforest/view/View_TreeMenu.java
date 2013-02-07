@@ -95,9 +95,9 @@ public class View_TreeMenu extends JPanel {
         
         this.add(new JLabel(" Trees : "));
         this.add(this.Button_empty);
-        //this.add(this.Button_yp);
-        //this.add(this.Button_st);
-        //this.add(this.Button_at);
+        this.add(this.Button_yp);
+        this.add(this.Button_st);
+        this.add(this.Button_at);
 
         this.add(new JLabel(""));
         
