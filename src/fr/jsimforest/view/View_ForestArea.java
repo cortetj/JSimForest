@@ -174,7 +174,7 @@ public class View_ForestArea extends JPanel{
                         break;
                     case 7 :
                         Controller_ForestArea.setForestAreaTabAt(x, y, 7);
-                        this.Cells[x][y].setBackground(Color.GREEN);
+                        this.Cells[x][y].setBackground(Enum_Cell.SMALL_OLDTREE.getColor());
                         break;
                 }
             

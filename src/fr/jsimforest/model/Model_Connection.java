@@ -49,6 +49,7 @@ public class Model_Connection {
          String user="root";
          String pass="root";
          
+         Class.forName("org.sqlite.JDBC");
          this.connect = DriverManager.getConnection(
                  doc.getElementsByTagName("url").item(0).getTextContent(),
                  doc.getElementsByTagName("login").item(0).getTextContent(),
