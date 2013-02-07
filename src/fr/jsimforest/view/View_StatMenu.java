@@ -7,11 +7,13 @@ package fr.jsimforest.view;
 import fr.jsimforest.controller.Controller_Cell;
 import fr.jsimforest.controller.Controller_ForestArea;
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridBagLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -40,13 +42,17 @@ public class View_StatMenu extends JPanel {
         
         public View_StatMenu() {
             
-            //this.setBorder(BorderFactory.createLineBorder(Color.black, 1));  
+            this.setBorder(BorderFactory.createLineBorder(Color.decode("#AAAAAA"), 1));  
             this.setPreferredSize(new Dimension(0,45));
             this.setLayout(new BorderLayout());
-            //this.setBackground(Color.RED);
+            //this.setBackground(Color.decode("#2c2c2c"));
+            
                         
             JPanel lb = new JPanel();
+            lb.setOpaque(false);
+          
             JPanel rb = new JPanel();
+            rb.setOpaque(false);
             
             lb.setLayout(new GridBagLayout());
             
@@ -83,6 +89,9 @@ public class View_StatMenu extends JPanel {
             View_StatMenu.Label_infect = new JLabel();
             View_StatMenu.Label_ash = new JLabel();
             
+            JLabel separator = new JLabel();
+            separator.setPreferredSize(new Dimension(10,10));
+            lb.add(separator);
             lb.add(new JLabel(" WIDTH : "));
             lb.add(View_StatMenu.Label_width);
             
