@@ -4,9 +4,8 @@
  */
 
 package fr.jsimforest.controller;
-import fr.jsmiforest.tools.Enum_Mode;
 import java.util.ArrayList;
-import fr.jsmiforest.tools.Enum_Cell;
+import fr.jsimforest.model.Enum_Cell;
 
 /**
  *
@@ -219,7 +218,7 @@ public class Controller_Moore {
         int forestArea[][]=Controller_ForestArea.getForestAreaTab();
         int [][] temp= new int[forestArea.length][forestArea[0].length];
             
-        if(Controller_ForestArea.getNbr_fire()==0 && Controller_ForestArea.getNbr_infect()==0){
+        if(Controller_ForestArea.getNbr_fire()==0 && Controller_ForestArea.getNbr_infect()==0 && Controller_ForestArea.getNbr_ash()==0){
             Controller_ForestArea.setStatut(1);
         }
         else
@@ -242,7 +241,6 @@ public class Controller_Moore {
                         break;
                 }
             }
-            
         }
         Controller_ForestArea.setForestAreaTab(temp);
     } 
