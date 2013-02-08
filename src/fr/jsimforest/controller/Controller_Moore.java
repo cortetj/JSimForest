@@ -167,8 +167,51 @@ public class Controller_Moore {
         return forestArea[y][x];
     }
     
-    private void setStateInfected(int forestArea[][], int y, int x){
+    private int setStateInfected(int forestArea[][], int y, int x){
+         boolean infected=false;
         
+        for(int i=0; i<getVoisinVanNeumann(y, x, forestArea).size(); i++){
+            if(getVoisinVanNeumann(y, x, forestArea).get(i)==5){
+                infected=true;
+            }
+        }
+        switch(forestArea[y][x]){
+            case 1:
+                if(infected){
+                    if(getRandom()<75000){
+                        return 5;
+                    }
+                }
+                break;
+            case 2:
+                if(infected){
+                    if(getRandom()<50000){
+                        return 5;
+                    }
+                }
+                break;
+            case 3:
+                if(infected){
+                    if(getRandom()<25000){
+                        return 5;
+                    }
+                }
+                break;
+            case 4:
+                return 6;
+            case 5:
+                return 0;
+            case 6:
+                return 0;
+            case 7:
+                if(infected){
+                    if(getRandom()<50000){
+                        return 5;
+                    }
+                }
+                break;
+        }
+        return forestArea[y][x];
     }
         
     public void evolutionArea(){
@@ -192,7 +235,7 @@ public class Controller_Moore {
                 switch(Controller_ForestArea.getStatut()){
                     case 1: temp[i][j]=setStateCellGrowth(forestArea, i, j);
                         break;
-                    case 2:
+                    case 2:temp[i][j]=setStateInfected(forestArea, i, j);
                         break;
                     case 3: temp[i][j]=setStateFire(forestArea, i, j);
                         break;
