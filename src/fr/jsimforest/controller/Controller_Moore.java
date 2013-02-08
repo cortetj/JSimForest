@@ -130,45 +130,45 @@ public class Controller_Moore {
                 fire=true;
             }
         }
-        
-            switch(forestArea[y][x]){
-                case 1:
-                  if(fire){
+        switch(forestArea[y][x]){
+            case 1:
+                if(fire){
                     if(getRandom()<25000){
                         return 4;
                     }
-                  }
+                }
                 break;
-                case 2:
-                   if(fire){
+            case 2:
+                if(fire){
                     if(getRandom()<50000){
-                          return 4;
-                      }
-                   }
-                    break;
-                case 3:
-                    if(fire){
-                       if(getRandom()<75000){
-                           return 4;
-                       }
+                        return 4;
                     }
-                    break;
-                case 4:
-                    return 6;
-                case 6:
-                    return 0;
-                case 7:
-                    if(fire){
-                        if(getRandom()<50000){
-                         return 4;
-                        }
+                }
+                break;
+            case 3:
+                if(fire){
+                    if(getRandom()<75000){
+                        return 4;
                     }
-                    break;
-            }
-            return forestArea[y][x];
+                }
+                break;
+            case 4:
+                return 6;
+            case 6:
+                return 0;
+            case 7:
+                if(fire){
+                    if(getRandom()<50000){
+                        return 4;
+                    }
+                }
+                break;
+        }
+        return forestArea[y][x];
     }
     
-    private void setStateInfected(int forestArea[][], int y, int x){        
+    private void setStateInfected(int forestArea[][], int y, int x){
+        
     }
         
     public void evolutionArea(){
@@ -183,7 +183,7 @@ public class Controller_Moore {
                 Controller_ForestArea.setStatut(2);
             }
         else
-            if(Controller_ForestArea.getNbr_fire()>1 || Controller_ForestArea.getNbr_ash()>0){
+            if(Controller_ForestArea.getNbr_fire()>0 || Controller_ForestArea.getNbr_ash()>0){
                     Controller_ForestArea.setStatut(3);
             }
 
@@ -199,7 +199,7 @@ public class Controller_Moore {
                 }
             }
         }
-            Controller_ForestArea.setForestAreaTab(temp);
+        Controller_ForestArea.setForestAreaTab(temp);
     } 
 
         public int getRandom(){
