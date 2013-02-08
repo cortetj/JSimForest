@@ -36,9 +36,6 @@ public class Window extends JFrame{
        
         this.forestArea = new View_ForestArea(this);
         this.tab = new JTabbedPane(JTabbedPane.TOP);
-        //UIManager.put("TabbedPane.selected", Color.black);  
-        //tabPane=new JTabbedPane();  
-        //tab.setBackground(Color.GREEN); 
         this.tab.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
         JPanel forestArea_zone = new JPanel(new BorderLayout());
         this.Tab_stat = new View_Stats();
