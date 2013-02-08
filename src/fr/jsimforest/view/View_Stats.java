@@ -5,7 +5,7 @@
 package fr.jsimforest.view;
 
 import fr.jsimforest.controller.Controller_ForestArea;
-import fr.jsimforest.controller.Utils_ExportCSV;
+import fr.jsmiforest.tools.Utils_ExportCSV;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.GridLayout;

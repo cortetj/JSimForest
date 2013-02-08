@@ -14,7 +14,7 @@ import java.sql.DriverManager;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
-import jsimforest.Utils;
+import fr.jsmiforest.tools.Utils;
 import org.w3c.dom.Document;
 
 public class Singleton{
@@ -28,13 +28,14 @@ public class Singleton{
     
 	private static Connection connectDB =null;
 	
-	public static Connection getConnectDB(){
+	public static Connection connectToDB(){
 		//singleton -> connect to 
 		if(Singleton.connectDB !=null){
 			return Singleton.connectDB;
 		}
+                
                 try{
-                    File fXmlFile = new File("src/fr/jsimforest/model/DataBaseInfo.xml");
+                    File fXmlFile = new File("src/fr/jsimforest/tools/DataBaseInfo.xml");
                     DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
                     DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
                     Document doc = dBuilder.parse(fXmlFile);
@@ -44,8 +45,10 @@ public class Singleton{
                     Singleton.connectDB =DriverManager.getConnection(
                            doc.getElementsByTagName("url").item(0).getTextContent(),
                            doc.getElementsByTagName("login").item(0).getTextContent(),
-                           doc.getElementsByTagName("password").item(0).getTextContent());		
+                           doc.getElementsByTagName("password").item(0).getTextContent());
+                    
                     System.out.println("Connection established...");
+                    
 		}catch (Exception e){
 			Singleton.connectDB =null;
 			Utils.errorGui(e, "ERROR CAN'T CONNECT TO MySQL DB...");

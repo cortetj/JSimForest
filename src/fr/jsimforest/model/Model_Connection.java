@@ -34,7 +34,7 @@ public class Model_Connection {
     public void connectToDB() {
         try {
 
-            File fXmlFile = new File("src/fr/jsimforest/model/DataBaseInfo.xml");
+            File fXmlFile = new File("src/fr/jsimforest/tools/DataBaseInfo.xml");
             DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
             DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
             Document doc = dBuilder.parse(fXmlFile);
