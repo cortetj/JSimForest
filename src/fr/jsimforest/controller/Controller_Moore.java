@@ -4,8 +4,9 @@
  */
 
 package fr.jsimforest.controller;
+import fr.jsmiforest.tools.Enum_Mode;
 import java.util.ArrayList;
-import fr.jsimforest.model.Enum_Cell;
+import fr.jsmiforest.tools.Enum_Cell;
 
 /**
  *
@@ -241,6 +242,7 @@ public class Controller_Moore {
                         break;
                 }
             }
+            
         }
         Controller_ForestArea.setForestAreaTab(temp);
     } 

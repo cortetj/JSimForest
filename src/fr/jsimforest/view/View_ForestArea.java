@@ -5,7 +5,7 @@
 package fr.jsimforest.view;
 
 import fr.jsimforest.controller.Controller_ForestArea;
-import fr.jsimforest.model.Enum_Cell;
+import fr.jsmiforest.tools.Enum_Cell;
 import fr.jsimforest.view.View_Cell;
 import jsimforest.Window;
 import java.awt.Color;
