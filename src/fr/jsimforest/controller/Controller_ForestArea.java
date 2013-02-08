@@ -27,10 +27,12 @@ public class Controller_ForestArea {
         private static int Nbr_infect;
         
         private static int statut;
+        private static int statut_player;
 
         
     public Controller_ForestArea() {
-
+        
+        Controller_ForestArea.statut_player = 0;
         Controller_ForestArea.statut = 1;
         Controller_ForestArea.name = "Default Forest";
         Controller_ForestArea.step = 0;

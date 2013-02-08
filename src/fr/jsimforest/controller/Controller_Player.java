@@ -33,11 +33,16 @@ public class Controller_Player {
         }
         
         public void nextStep() {
-                moore.evolutionArea();
-                Controller_ForestArea.setStep(Controller_ForestArea.getStep()+1);
-                System.out.println(Controller_ForestArea.getStep());
-                View_Stats.addStatRow();
             
+                if(Controller_ForestArea.getNbr_fire() == 0) {
+                    this.stopPlayer();
+                }
+                //else {
+                    moore.evolutionArea();
+                    Controller_ForestArea.setStep(Controller_ForestArea.getStep()+1);
+                    System.out.println(Controller_ForestArea.getStep());
+                    View_Stats.addStatRow();
+                //}
         }
         
         public void autoPlay() {
