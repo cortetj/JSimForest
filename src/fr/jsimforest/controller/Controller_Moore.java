@@ -123,7 +123,7 @@ public class Controller_Moore {
             return forestArea[y][x];
     }
         
-    private int setStateFizre(int forestArea[][], int y, int x){
+    private int setStateFire(int forestArea[][], int y, int x){
         boolean fire=false;
         
         for(int i=0; i<getVoisinMoore(y, x, forestArea).size(); i++){
