@@ -114,6 +114,8 @@ public class Controller_Moore {
                  return 7;
             case 3:
                  return forestArea[y][x];
+            case 6:
+                 return 0;
             case 7:
                  return 3;
             }
@@ -122,16 +124,15 @@ public class Controller_Moore {
         
     private int setStateFire(int forestArea[][], int y, int x){
         boolean fire=false;
-        System.out.println("Voisin de la cellule ["+y+"]["+x+"]--->");
+        
+      //  System.out.println("CELULLE a l'INDICE ["+y+"]["+x+"] STATUT voisin en feu-> "+fire);
+      //  System.out.println("Voisin de la cellule ["+y+"]["+x+"]--->");
         for(int i=0; i<getVoisinMoore(y, x, forestArea).size(); i++){
-            System.out.println("voisin n°"+(i+1)+" = "+getVoisinMoore(y, x, forestArea).get(i));
+            //System.out.println("voisin n°"+(i+1)+" = "+getVoisinMoore(y, x, forestArea).get(i));
             if(getVoisinMoore(y, x, forestArea).get(i)==4){
-                
                 fire=true;
-            }
-           // System.out.println("cellule à l'indice ["+y+"]["+x+"] value = ["+forestArea[y][x]+"] case voisines de type feu ="+fire+"");
+            }// System.out.println("cellule à l'indice ["+y+"]["+x+"] value = ["+forestArea[y][x]+"] case voisines de type feu ="+fire+"");
         }
-        System.out.println("CELULLE a l'INDICE ["+y+"]["+x+"] STATUT voisin en feu-> "+fire);
         
             switch(forestArea[y][x]){
                 case 1:
@@ -147,12 +148,14 @@ public class Controller_Moore {
                           return 4;
                       }
                    }
+                    break;
                 case 3:
                     if(fire){
                        if(getRandom()<75000){
                            return 4;
                        }
                     }
+                    break;
                 case 4:
                     return 6;
                 case 6:
@@ -163,6 +166,7 @@ public class Controller_Moore {
                          return 4;
                         }
                     }
+                    break;
             }
             return forestArea[y][x];
     }
@@ -172,7 +176,7 @@ public class Controller_Moore {
         
     public int changeCell(int forestArea[][], int y, int x, Enum_Mode MODE){
         if(MODE==MODE.MODE_FIRE){
-            System.out.println("CHANGECELL MODE FIRE ACTIVATE");
+            //System.out.println("CHANGECELL MODE FIRE ACTIVATE");
             return setStateFire(forestArea, y, x);
         }
         else{
@@ -187,19 +191,19 @@ public class Controller_Moore {
             int [][] temp= new int[forestArea.length][forestArea[0].length];
             
             int state=returnMode(forestArea);
-            System.out.println("MOD = "+state);
+           // System.out.println("MOD = "+state);
             int mod=0;
             
 
             for(int i=0; i<temp.length;i++){
                 for(int j=0; j<temp[0].length;j++){
-                    if(state==1 && mod==0){
-                        temp[i][j]=changeCell(forestArea, i, j, mode.MODE_GROWTH);
+                    if(Controller_ForestArea.getNbr_fire()==0 && Controller_ForestArea.getNbr_infect()==0){
+                        if(Controller_ForestArea.getStatut()==1){
+                        temp[i][j]=setStateCellGrowth(forestArea, i, j);
+                        }
                     }
-                    else if(state==3){
-                        if(mod==0){
-                        mod++;}
-                        temp[i][j]=changeCell(forestArea, i, j, mode.MODE_FIRE);
+                    else if(Controller_ForestArea.getNbr_fire()>0 || Controller_ForestArea.getNbr_ash()>0){
+                        temp[i][j]=setStateFire(forestArea, i, j);
                     }
                     else
                         System.out.println("Mode infection");

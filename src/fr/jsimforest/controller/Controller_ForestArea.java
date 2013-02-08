@@ -302,6 +302,13 @@ public class Controller_ForestArea {
         step = aStep;
     }
     
+    public static int getStatut(){
+        return statut;
+    }
+    public static void setStatut(int state){
+       statut=state;
+    }
+    
     public static void setForestAreaTabAt(int x, int y, int value) {
         
         switch(Controller_ForestArea.ForestAreaTab[x][y]) {
