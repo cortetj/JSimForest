@@ -18,7 +18,7 @@ public enum Enum_Cell {
     ADULT_TREE(Color.decode("#0b210b"), 3), 
     FIRE(Color.decode("#E0AF1B"), 4), 
     INFECT(Color.decode("#E01BD9"), 5), 
-    ASH(Color.decode("#E01BD9"), 6),
+    ASH(Color.decode("#CCCCCC"), 6),
     SMALL_OLDTREE(Color.decode("#2a7e2a"), 7);
       
      private Color Cell_color; 
