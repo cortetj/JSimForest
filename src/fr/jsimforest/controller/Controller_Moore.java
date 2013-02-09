@@ -5,7 +5,6 @@
 
 package fr.jsimforest.controller;
 import java.util.ArrayList;
-import fr.jsimforest.model.Enum_Cell;
 
 /**
  *
@@ -13,10 +12,9 @@ import fr.jsimforest.model.Enum_Cell;
  */
 public class Controller_Moore {
     
-  private static Enum_Mode mode;
   
 
-     public ArrayList<Integer> getVoisinMoore(int _y, int _x, int[][] forestArea) {
+     public ArrayList<Integer> getNeighboorMoore(int _y, int _x, int[][] forestArea) {
         ArrayList<Integer> neighboor=new ArrayList<Integer>();
         if (_y < 0 || _y >= forestArea.length || _x < 0 || _x >= forestArea[0].length) {
             return neighboor;
@@ -51,7 +49,7 @@ public class Controller_Moore {
         }
     }
      
-    public ArrayList<Integer> getVoisinVanNeumann(int _y, int _x, int[][] forestArea) {
+    public ArrayList<Integer> getNeighboorVanNeumann(int _y, int _x, int[][] forestArea) {
         ArrayList<Integer> neighboor=new ArrayList<Integer>();
          if (_y < 0 || _y >= forestArea.length || _x < 0 || _x >= forestArea[0].length) {
             return neighboor;
@@ -90,11 +88,11 @@ public class Controller_Moore {
         int nbTree=0;
         int nbYoungTree=0;
             
-        for(int i=0; i<getVoisinMoore(y, x, forestArea).size(); i++){
-            if(getVoisinMoore(y, x, forestArea).get(i)==3){
+        for(int i=0; i<getNeighboorMoore(y, x, forestArea).size(); i++){
+            if(getNeighboorMoore(y, x, forestArea).get(i)==3){
                 nbTree++;
             }
-            else if(getVoisinMoore(y, x, forestArea).get(i)==2 || getVoisinMoore(y, x, forestArea).get(i)==7){
+            else if(getNeighboorMoore(y, x, forestArea).get(i)==2 || getNeighboorMoore(y, x, forestArea).get(i)==7){
                 nbYoungTree++;
             }
         }
@@ -125,8 +123,8 @@ public class Controller_Moore {
     private int setStateFire(int forestArea[][], int y, int x){
         boolean fire=false;
         
-        for(int i=0; i<getVoisinMoore(y, x, forestArea).size(); i++){
-            if(getVoisinMoore(y, x, forestArea).get(i)==4){
+        for(int i=0; i<getNeighboorMoore(y, x, forestArea).size(); i++){
+            if(getNeighboorMoore(y, x, forestArea).get(i)==4){
                 fire=true;
             }
         }
@@ -170,8 +168,8 @@ public class Controller_Moore {
     private int setStateInfected(int forestArea[][], int y, int x){
          boolean infected=false;
         
-        for(int i=0; i<getVoisinVanNeumann(y, x, forestArea).size(); i++){
-            if(getVoisinVanNeumann(y, x, forestArea).get(i)==5){
+        for(int i=0; i<getNeighboorVanNeumann(y, x, forestArea).size(); i++){
+            if(getNeighboorVanNeumann(y, x, forestArea).get(i)==5){
                 infected=true;
             }
         }
