@@ -18,12 +18,13 @@ public class Model_Stats {
     private int stat_fire;
     private int stat_ash;
     private int stat_infecte;
+    private int id_save;
     
     public Model_Stats(){}
     
     public Model_Stats(int id, int t, int stat_empty, int stat_youngplant,
             int stat_youngtree,int stat_tree, int stat_fire, int stat_ash, 
-            int stat_infecte){
+            int stat_infecte, int id_save){
         this.id_stat=id;
         this.t=t;
         this.stat_empty=stat_empty;
@@ -33,6 +34,7 @@ public class Model_Stats {
         this.stat_fire=stat_fire;
         this.stat_ash=stat_ash;
         this.stat_infecte=stat_infecte;
+        this.id_save=id_save;
     }
 
     /**
@@ -159,6 +161,20 @@ public class Model_Stats {
      */
     public void setStat_infecte(int stat_infecte) {
         this.stat_infecte = stat_infecte;
+    }
+
+    /**
+     * @return the id_save
+     */
+    public int getId_save() {
+        return id_save;
+    }
+
+    /**
+     * @param id_save the id_save to set
+     */
+    public void setId_save(int id_save) {
+        this.id_save = id_save;
     }
     
 }
