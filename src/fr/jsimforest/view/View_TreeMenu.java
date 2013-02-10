@@ -8,7 +8,6 @@ import fr.jsimforest.controller.Controller_Cell;
 import fr.jsimforest.controller.Controller_Player;
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
@@ -51,7 +50,6 @@ public class View_TreeMenu extends JPanel {
         JLabel separator = new JLabel();
         separator.setText("");
 
-        //this.setLayout(new GridLayout(19, 1));
         this.Button_empty = new JButton("Empty");
         ImageIcon Ico_cell_empty = new ImageIcon("img/ico_cell_empty.png");        
         this.Button_empty = new JButton(Ico_cell_empty);
@@ -67,6 +65,12 @@ public class View_TreeMenu extends JPanel {
         });
         
         this.Button_yp = new JButton("Young plant");
+        ImageIcon Ico_cell_yp = new ImageIcon("img/ico_cell_yp.png");        
+        this.Button_yp = new JButton(Ico_cell_yp);
+        this.Button_yp.setOpaque(false);
+        this.Button_yp.setBorderPainted(false);
+        this.Button_yp.setContentAreaFilled(false);
+        this.Button_yp.setPreferredSize(new Dimension(130, 34));
         this.Button_yp.addActionListener(new ActionListener() {
           @Override
           public void actionPerformed(ActionEvent evt) {
@@ -75,6 +79,12 @@ public class View_TreeMenu extends JPanel {
         });
         
         this.Button_st = new JButton("Small tree");
+        ImageIcon Ico_cell_st = new ImageIcon("img/ico_cell_st.png");        
+        this.Button_st = new JButton(Ico_cell_st);
+        this.Button_st.setOpaque(false);
+        this.Button_st.setBorderPainted(false);
+        this.Button_st.setContentAreaFilled(false);
+        this.Button_st.setPreferredSize(new Dimension(130, 34));
         this.Button_st.addActionListener(new ActionListener() {
           @Override
           public void actionPerformed(ActionEvent evt) {
@@ -83,6 +93,12 @@ public class View_TreeMenu extends JPanel {
         });
         
         this.Button_at = new JButton("Adult tree");
+        ImageIcon Ico_cell_at = new ImageIcon("img/ico_cell_at.png");        
+        this.Button_at = new JButton(Ico_cell_at);
+        this.Button_at.setOpaque(false);
+        this.Button_at.setBorderPainted(false);
+        this.Button_at.setContentAreaFilled(false);
+        this.Button_at.setPreferredSize(new Dimension(130, 34));
         this.Button_at.addActionListener(new ActionListener() {
           @Override
           public void actionPerformed(ActionEvent evt) {
@@ -182,7 +198,7 @@ public class View_TreeMenu extends JPanel {
         
         JPanel Fieldset_tree = new JPanel();
         Fieldset_tree.setBorder(BorderFactory.createTitledBorder("TREES"));
-        Fieldset_tree.setPreferredSize(new Dimension(145,160));
+        Fieldset_tree.setPreferredSize(new Dimension(145,190));
         Fieldset_tree.add(this.Button_empty);
         Fieldset_tree.add(this.Button_yp);
         Fieldset_tree.add(this.Button_st);
@@ -198,12 +214,12 @@ public class View_TreeMenu extends JPanel {
         
         
         Fieldset_pref.add(new JLabel("Speed :"));
+        
         JPanel jp_speed = new JPanel();
-        //jp_speed.setPreferredSize(new Dimension(10,25));
         jp_speed.add(this.Slide_speed);
         Fieldset_pref.add(jp_speed);
         JPanel jp_step = new JPanel();
-        //jp_step.setPreferredSize(new Dimension(150, 25));
+
         jp_step.add(new JLabel("t Max :"));
         jp_step.add(this.Text_maxStep);
         Fieldset_pref.add(jp_step);
