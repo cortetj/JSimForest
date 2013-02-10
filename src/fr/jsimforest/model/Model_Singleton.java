@@ -41,8 +41,7 @@ public class Model_Singleton{
                     Document doc = dBuilder.parse(fXmlFile);
                     doc.getDocumentElement().normalize();
                     
-                    Class.forName("org.sqlite.JDBC"); // Utile? YES or NO?
-                    //Singleton.connectDB =DriverManager.getConnection(Model_Singleton.dbName, Model_Singleton.user, Model_Singleton.pass);	
+                    Class.forName("org.sqlite.JDBC");	
                     Model_Singleton.connectDB =DriverManager.getConnection(
                            doc.getElementsByTagName("url").item(0).getTextContent(),
                            doc.getElementsByTagName("login").item(0).getTextContent(),
