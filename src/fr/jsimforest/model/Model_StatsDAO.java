@@ -28,10 +28,8 @@ public class Model_StatsDAO extends DAO<Model_Stats> {
                                                         obj.getStat_fire()+"','"+obj.getStat_ash()+"','"+obj.getStat_infecte()+")");
     }
 
-    @Override
-    public void delete(Model_Stats obj) throws SQLException {
-        this.connect.createStatement().executeUpdate("DELETE FROM STATS WHERE id_stat =" +obj.getId_stat()+"");
-    }
+ 
+
 
     @Override
     public void select(Model_Stats obj) throws SQLException {
@@ -49,5 +47,10 @@ public class Model_StatsDAO extends DAO<Model_Stats> {
 		return new Model_Stats(result.getInt(1),result.getInt(2),result.getInt(3),
                         result.getInt(4),result.getInt(5),result.getInt(6),result.getInt(7),
                         result.getInt(8),result.getInt(9));
+    }
+
+    @Override
+    public void delete(Model_Stats obj) throws SQLException {
+        this.connect.createStatement().executeUpdate("DELETE FROM STATS WHERE id_stat =" +obj.getId_stat()+"");
     }
 }

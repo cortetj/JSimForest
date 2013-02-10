@@ -9,6 +9,7 @@ import java.util.ArrayList;
 
 import fr.jsimforest.model.Model_SaveDAO;
 import fr.jsimforest.model.Model_Save;
+import fr.jsimforest.model.Model_Stats;
 import fr.jsimforest.model.DAO;
 import fr.jsimforest.model.Model_Singleton;
 import fr.jsimforest.tools.Utils;
@@ -18,6 +19,7 @@ import fr.jsimforest.tools.Utils;
  */
 public class Controller_Save {
     private DAO<Model_Save> connectSaveDAO;
+    private DAO<Model_Stats> connectStatsDAO;
     private ArrayList<Model_Save> saves;
     private Model_Save save;
     
@@ -59,8 +61,15 @@ public class Controller_Save {
         }
     }
     
-    public void newSave(Model_Save save) throws SQLException{
+    public void newSave(Model_Save save, Model_Stats stats) throws SQLException{
+        save.setId_stat(stats.getId_stat());
+        this.connectStatsDAO.create(stats);
         this.connectSaveDAO.create(save);
+    }
+    
+    public void DeleteSave(Model_Save save) throws SQLException{
+        this.connectStatsDAO.delete(save.getStats());
+        this.connectSaveDAO.delete(save);
     }
 
     /**
