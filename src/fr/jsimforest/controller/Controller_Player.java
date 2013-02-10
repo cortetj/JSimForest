@@ -18,54 +18,76 @@ public class Controller_Player {
         private static int gap;
         private static int nbr_step;
 
+
         private Timer timer;
         private Controller_Moore moore;
         private Window parent;
-        private RemindTask rt;
+        private static RemindTask rt;
+        
+        private Boolean paused;
 
         public Controller_Player(Window parent) {
-            this.rt = new Controller_Player.RemindTask();
+            this.paused = false;    
+            Controller_Player.rt = new Controller_Player.RemindTask();
             this.parent = parent;
-            Controller_Player.nbr_step = 1511;
-            Controller_Player.gap =1;
+            Controller_Player.nbr_step = 0;
+            Controller_Player.gap = 10;
             timer = new Timer();
             this.moore = new Controller_Moore();
         }
         
         public void nextStep() {
-            
-                if(Controller_ForestArea.getNbr_fire() == 0) {
-                    this.stopPlayer();
-                }
-                //else {
-                    moore.evolutionArea();
-                    Controller_ForestArea.setStep(Controller_ForestArea.getStep()+1);
-                    System.out.println(Controller_ForestArea.getStep());
-                    View_Stats.addStatRow();
-                //}
+            moore.evolutionArea();
+            Controller_ForestArea.setStep(Controller_ForestArea.getStep()+1);
+            if (View_Stats.isSave_stat()) {
+                View_Stats.addStatRow();
+            }
         }
         
         public void autoPlay() {
-            this.rt = new Controller_Player.RemindTask();
-            timer.scheduleAtFixedRate(this.rt, 0, Controller_Player.gap * 100);
+            Controller_Player.rt = new Controller_Player.RemindTask();
+            timer.scheduleAtFixedRate(Controller_Player.rt, 0, Controller_Player.gap * 10);
         }
         
-        public void stopPlayer() {
+        public static void stopPlayer() {
             rt.cancel();
         }
         
         class RemindTask extends TimerTask {
             @Override
             public void run() {
-                if (Controller_ForestArea.getStep() < Controller_Player.nbr_step) {
+                if ((Controller_ForestArea.getStep() < Controller_Player.getNbr_step() || Controller_Player.getNbr_step() == 0) && !paused) {
+                    
+                    if(Controller_ForestArea.getStatut() == 1){
+                        paused = false;
+                    }
+                    
+                    else if(Controller_ForestArea.getStatut() != 1) {
+                        paused = true;
+                    }
+                    
+                    parent.updateForest(); 
                     nextStep();
-                    parent.updateForest();
+                        
+
+                    if(Controller_ForestArea.getStatut() == 1 && paused) {
+                        paused = true;
+                    }
+                    else if(Controller_ForestArea.getStatut() == 1 && !paused) {
+                        paused = false;
+                    }
+                    else {
+                        paused = false;
+                    }
+                    
                 }
                 else {
+                    paused = false;
                     stopPlayer();
                 }
             }
         }
+
 
     /**
      * @return the gap
@@ -79,5 +101,19 @@ public class Controller_Player {
      */
     public static void setGap(int aGap) {
         gap = aGap;
+    }
+    
+    /**
+     * @return the nbr_step
+     */
+    public static int getNbr_step() {
+        return nbr_step;
+    }
+
+    /**
+     * @param aNbr_step the nbr_step to set
+     */
+    public static void setNbr_step(int aNbr_step) {
+        nbr_step = aNbr_step;
     }
 }

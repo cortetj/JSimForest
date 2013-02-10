@@ -6,6 +6,7 @@ package fr.jsimforest.view;
 
 import fr.jsimforest.controller.Controller_Cell;
 import fr.jsimforest.controller.Controller_ForestArea;
+import fr.jsimforest.controller.Controller_Player;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -139,6 +140,13 @@ public class View_StatMenu extends JPanel {
         View_StatMenu.Label_fire.setText(" " +Controller_ForestArea.getNbr_fire() + " | ");
         View_StatMenu.Label_infect.setText(" " +Controller_ForestArea.getNbr_infect() + " | ");
         View_StatMenu.Label_ash.setText(" " +Controller_ForestArea.getNbr_ash() + " ");
+        if (Controller_Player.getNbr_step() == 0 ) {
+             View_ActionMenu.getStep().setText(Controller_ForestArea.getStep()+1 + " / \u221E");
+        }
+        else {
+            View_ActionMenu.getStep().setText(Controller_ForestArea.getStep()+1 + " / " + Controller_Player.getNbr_step());            
+        }
+        
     }
     
 }

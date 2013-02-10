@@ -5,16 +5,13 @@
 
 package fr.jsimforest.controller;
 import java.util.ArrayList;
-import fr.jsimforest.model.Enum_Cell;
 
 /**
  *
  * @author raff
  */
 public class Controller_Moore {
-    
-  private static Enum_Mode mode;
-  
+      
 
      public ArrayList<Integer> getVoisinMoore(int _y, int _x, int[][] forestArea) {
         ArrayList<Integer> neighboor=new ArrayList<Integer>();
@@ -70,20 +67,6 @@ public class Controller_Moore {
             }
             return neighboor;
         }
-    }
-    
-    private int returnMode(int forestArea[][]){
-        for(int i=0; i<forestArea.length; i++){
-            for(int j=0; j<forestArea[0].length; j++){
-                if(forestArea[i][j]==4){
-                    return 3;  
-                }
-                else if(forestArea[i][j]==6){
-                    return 2;
-                }
-            }
-        }
-        return 1;
     }
     
     private int setStateCellGrowth(int forestArea[][], int y, int x){
@@ -242,7 +225,11 @@ public class Controller_Moore {
                 }
             }
         }
+        
+
         Controller_ForestArea.setForestAreaTab(temp);
+        
+  
     } 
 
         public int getRandom(){

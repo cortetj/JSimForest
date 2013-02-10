@@ -92,7 +92,7 @@ public class View_ForestArea extends JPanel{
     
     public void updateGridColors() {
         
-        Controller_ForestArea.updatePropWithTab();
+        
         
         for(int i=0; i<Controller_ForestArea.getHeight(); i++) {
                         
@@ -119,9 +119,8 @@ public class View_ForestArea extends JPanel{
                 }
             }
         }
-        //this.revalidate();
         
-        
+        Controller_ForestArea.updatePropWithTab();
         
     }
 

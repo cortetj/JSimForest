@@ -4,13 +4,12 @@
  */
 package jsimforest;
 
-import fr.jsimforest.view.View_Stats;
 import fr.jsimforest.view.View_ActionMenu;
 import fr.jsimforest.view.View_ForestArea;
 import fr.jsimforest.view.View_StatMenu;
+import fr.jsimforest.view.View_Stats;
 import fr.jsimforest.view.View_TreeMenu;
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.ComponentOrientation;
 import javax.swing.*;
 /**

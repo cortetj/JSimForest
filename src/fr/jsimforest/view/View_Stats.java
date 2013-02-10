@@ -7,7 +7,6 @@ package fr.jsimforest.view;
 import fr.jsimforest.controller.Controller_ForestArea;
 import fr.jsmiforest.tools.Utils_ExportCSV;
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -31,17 +30,20 @@ public class View_Stats extends JPanel {
     private JTable Table_Stat_prc;
     private JTable Table_Stat_actPrc;
     
-    private boolean Save_Data;
-    private JSplitPane split, split2, split3;
+    private JSplitPane split, split2;
     private static DefaultTableModel Model_stat;
     private static DefaultTableModel Model_stat_prc;
     private static DefaultTableModel Model_stat_actPrc;
+    
+    private static boolean save_stat;
    
     private JButton exportCSV;
     private JButton deleteRows;
     
     public View_Stats() {
   
+        View_Stats.save_stat = false;
+        
         JPanel buttons = new JPanel();
         JPanel Stat_panel = new JPanel();
         JPanel Stat_panel_prc = new JPanel();
@@ -100,9 +102,7 @@ public class View_Stats extends JPanel {
         this.deleteRows.addActionListener(new ActionListener() {
           @Override
           public void actionPerformed(ActionEvent evt) {
-              Model_stat.setRowCount(0);
-              Model_stat_prc.setRowCount(0);
-              Model_stat_actPrc.setRowCount(0);
+                ClearTable();
           }
         });
         
@@ -156,4 +156,27 @@ public class View_Stats extends JPanel {
         View_Stats.Model_stat.addRow(data);
         View_Stats.Model_stat_prc.addRow(data_prc);
     }
+    
+    public static void ClearTable() {
+          Model_stat.setRowCount(0);
+          Model_stat_prc.setRowCount(0);
+          Model_stat_actPrc.setRowCount(0);
+    }
+
+    /**
+     * @return the save_stat
+     */
+    public static boolean isSave_stat() {
+        return save_stat;
+    }
+
+    /**
+     * @param aSave_stat the save_stat to set
+     */
+    public static void setSave_stat(boolean aSave_stat) {
+        save_stat = aSave_stat;
+    }
+
+
+
 }
