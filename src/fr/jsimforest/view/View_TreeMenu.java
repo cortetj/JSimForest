@@ -122,7 +122,10 @@ public class View_TreeMenu extends JPanel {
                   Text_maxStep.setEnabled(false);
                   Controller_Player.setNbr_step(0);
               }
-              else {Text_maxStep.setEnabled(true);}
+              else {
+                Text_maxStep.setEnabled(true);
+                Controller_Player.setNbr_step(Model_maxStep.getNumber().intValue());
+              }
           }
         });
         
@@ -142,6 +145,7 @@ public class View_TreeMenu extends JPanel {
         this.Slide_speed.setPreferredSize(new Dimension(71,45));
         this.Slide_speed.setMinimum(1);
         this.Slide_speed.setMaximum(5);
+        this.Slide_speed.setInverted(true);
         this.Slide_speed.setValue(5);
         this.Slide_speed.setPaintTicks(true);
         this.Slide_speed.setPaintLabels(true);
