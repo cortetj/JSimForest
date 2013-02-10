@@ -18,6 +18,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
@@ -42,7 +43,9 @@ public class View_ActionMenu extends JPanel{
     private JButton Button_zoomin;
     private JButton Button_zoomout;
     
-    private Controller_Player player;
+    private static JLabel step;
+    
+    private static Controller_Player player;
     
     
     public View_ActionMenu(final Window parent) {
@@ -54,9 +57,10 @@ public class View_ActionMenu extends JPanel{
         //lb.setLayout(new GridLayout(1,5, 0, 0));
         JPanel rb = new JPanel();
         rb.setLayout(new GridLayout(1,6, 0, 0));
+        rb.setPreferredSize(new Dimension(270,35));
         rb.setOpaque(false);
          
-        this.player = new Controller_Player(parent);
+        View_ActionMenu.player = new Controller_Player(parent);
         //this.setBorder(BorderFactory.createLineBorder(Color.black, 1)); 
         this.setPreferredSize(new Dimension(0,42));
         this.setBackground(Color.decode("#2c2c2c"));
@@ -73,6 +77,7 @@ public class View_ActionMenu extends JPanel{
         this.Button_new.addActionListener(new ActionListener() {
           @Override
           public void actionPerformed(ActionEvent evt) {
+                 Controller_Player.stopPlayer();
                  Window_NewForest Window_new = new Window_NewForest(parent);
           }
         });
@@ -86,6 +91,7 @@ public class View_ActionMenu extends JPanel{
         this.Button_open.addActionListener(new ActionListener() {
           @Override
           public void actionPerformed(ActionEvent evt) {
+                Controller_Player.stopPlayer();
                 JFileChooser fc = new JFileChooser();
                 fc.showOpenDialog(fc);
           }
@@ -97,6 +103,12 @@ public class View_ActionMenu extends JPanel{
         this.Button_save.setContentAreaFilled(false);
         this.Button_save.setPreferredSize(new Dimension(78, 33));
         this.Button_save.setBorderPainted(false);
+        this.Button_save.addActionListener(new ActionListener() {
+          @Override
+          public void actionPerformed(ActionEvent evt) {
+                 JOptionPane.showMessageDialog(null, "Forest save");
+          }
+        });
 
         ImageIcon Ico_load = new ImageIcon("img/ico_load.png");        
         this.Button_load = new JButton(Ico_load);
@@ -107,6 +119,7 @@ public class View_ActionMenu extends JPanel{
         this.Button_load.addActionListener(new ActionListener() {
           @Override
           public void actionPerformed(ActionEvent evt) {
+                Controller_Player.stopPlayer();
                 Window_LoadForest Window_new = new Window_LoadForest();
           }
         });
@@ -120,7 +133,7 @@ public class View_ActionMenu extends JPanel{
         this.Button_play.addActionListener(new ActionListener() {
           @Override
           public void actionPerformed(ActionEvent evt) {
-              player.autoPlay();
+                getPlayer().autoPlay();
           }
         });
         
@@ -133,7 +146,7 @@ public class View_ActionMenu extends JPanel{
         this.Button_pause.addActionListener(new ActionListener() {
           @Override
           public void actionPerformed(ActionEvent evt) {
-              player.stopPlayer();
+              Controller_Player.stopPlayer();
               parent.updateForest();
           }
         });
@@ -147,7 +160,7 @@ public class View_ActionMenu extends JPanel{
         this.Button_nf.addActionListener(new ActionListener() {
           @Override
           public void actionPerformed(ActionEvent evt) {
-              player.nextStep();
+                getPlayer().nextStep();
               parent.updateForest();
           }
         });
@@ -168,6 +181,7 @@ public class View_ActionMenu extends JPanel{
         this.Button_zoomin.addActionListener(new ActionListener() {
           @Override
           public void actionPerformed(ActionEvent evt) {
+                Controller_Player.stopPlayer();
                 parent.forestAreaZoomIn();
           }
         });
@@ -181,10 +195,15 @@ public class View_ActionMenu extends JPanel{
         this.Button_zoomout.addActionListener(new ActionListener() {
           @Override
           public void actionPerformed(ActionEvent evt) {
+                Controller_Player.stopPlayer();
                 parent.forestAreaZoomOut();
           }
         });
         
+        View_ActionMenu.step = new JLabel("0");
+        View_ActionMenu.step.setPreferredSize(new Dimension(100, 30));
+        View_ActionMenu.step.setForeground(Color.WHITE);
+                
         ImageIcon logo = new ImageIcon("img/logo.png");
         lb.add(new JLabel(logo));
         
@@ -192,7 +211,7 @@ public class View_ActionMenu extends JPanel{
         lb.add(this.Button_open);
         lb.add(this.Button_save);
         lb.add(this.Button_load);
-         
+
         rb.add(this.Button_pause);
         rb.add(this.Button_play);
         rb.add(this.Button_nf);
@@ -200,10 +219,41 @@ public class View_ActionMenu extends JPanel{
         rb.add(separator);
         rb.add(this.Button_zoomin);
         rb.add(this.Button_zoomout);
-        
-                
+
         this.add(lb, BorderLayout.WEST);
         this.add(rb, BorderLayout.EAST);
-        
+        JPanel jp_step = new JPanel();
+        jp_step.setOpaque(false);
+        jp_step.add(View_ActionMenu.step);
+        this.add(jp_step, BorderLayout.CENTER);
+
+    }
+    
+    /**
+     * @return the step
+     */
+    public static JLabel getStep() {
+        return step;
+    }
+
+    /**
+     * @param aStep the step to set
+     */
+    public static void setStep(JLabel aStep) {
+        step = aStep;
+    }
+
+    /**
+     * @return the player
+     */
+    public static Controller_Player getPlayer() {
+        return player;
+    }
+
+    /**
+     * @param aPlayer the player to set
+     */
+    public static void setPlayer(Controller_Player aPlayer) {
+        player = aPlayer;
     }
 }

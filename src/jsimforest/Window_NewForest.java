@@ -5,6 +5,7 @@
 package jsimforest;
 
 import fr.jsimforest.controller.Controller_ForestArea;
+import fr.jsimforest.view.View_Stats;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
@@ -12,6 +13,7 @@ import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -46,21 +48,19 @@ public class Window_NewForest extends JFrame {
     public Window_NewForest(final Window parent) {
         
         this.setTitle("Create new forest");
-        this.setSize(500, 500);
+        this.setSize(400, 160);
         this.setLocationRelativeTo(null);
         
         this.setLayout(new BorderLayout());
         
         this.Buttons = new JPanel();
-        JPanel Form_content = new JPanel(new GridLayout(1,1));
+                
         this.Form = new JPanel();
+        this.Form.setBorder(BorderFactory.createEmptyBorder(20, 0, 10, 0));
         
         this.Text_name = new JTextField();
-        this.Text_name.setPreferredSize(new Dimension(400,25));
+        this.Text_name.setPreferredSize(new Dimension(300,25));
         
-        this.Form.setLayout(new GridBagLayout());
-        //this.Form.setPreferredSize(new Dimension(400,100));
-        //this.Form.setBackground(Color.BLUE);
         this.Button_ok = new JButton("OK");
         
         this.Button_cancel = new JButton("Cancel");
@@ -72,9 +72,9 @@ public class Window_NewForest extends JFrame {
         this.Buttons.add(this.Button_cancel);
 
         this.Spinner_height = new JSpinner(this.Model_height);
-        this.Spinner_height.setPreferredSize(new Dimension(50,25));
+        this.Spinner_height.setPreferredSize(new Dimension(110,25));
         this.Spinner_width = new JSpinner(this.Model_width);
-        this.Spinner_width.setPreferredSize(new Dimension(50,25));
+        this.Spinner_width.setPreferredSize(new Dimension(110,25));
 
         this.Button_ok.addActionListener(new ActionListener() {
           @Override
@@ -82,6 +82,8 @@ public class Window_NewForest extends JFrame {
               if(Text_name.getText().length() > 0) {
                 Controller_ForestArea.defautTab(Model_width.getNumber().intValue(), Model_height.getNumber().intValue(), Text_name.getText());
                 Controller_ForestArea.setStep(0);
+                
+                View_Stats.ClearTable();
 
                 parent.setWindow_title("JSimForest - " + Controller_ForestArea.getName());
                 parent.newForest();
@@ -101,55 +103,17 @@ public class Window_NewForest extends JFrame {
           }
         });
         
-        GridBagConstraints gbc = new GridBagConstraints();
         
-    gbc.gridx = 0;
-    gbc.gridy = 0;
-    
-    gbc.gridheight = 1;
-    gbc.gridwidth = 1;
-    
-        this.Form.add(new JLabel("Name   "), gbc);
+        this.Form.add(new JLabel("Name : "));
+        this.Form.add(this.Text_name);
+        this.Form.add(new JLabel("Width : "));
+        this.Form.add(this.Spinner_width);
+        this.Form.add(new JLabel("  "));
+        this.Form.add(new JLabel("Height : "));
+        this.Form.add(this.Spinner_height);
         
-    gbc.gridx = 1;
-
-    gbc.gridheight = 1;
-    gbc.gridwidth = 3;
-    
-        this.Form.add(this.Text_name, gbc);
         
-    gbc.gridx = 0;
-    gbc.gridy = 2;
-
-    gbc.gridheight = 1;
-    gbc.gridwidth = 1;
-    
-        this.Form.add(new JLabel("Height : "), gbc);
-        
-    gbc.gridx = 1;
-
-    gbc.gridheight = 1;
-    gbc.gridwidth = 1;
-    
-        this.Form.add(this.Spinner_height, gbc);
-        
-    gbc.gridx = 2;
-
-    gbc.gridheight = 1;
-    gbc.gridwidth = 1;
-    
-        this.Form.add(new JLabel("Width : "), gbc);
-        
-    gbc.gridx = 3;
-
-    gbc.gridheight = 1;
-    gbc.gridwidth = 1;
-    
-        this.Form.add(this.Spinner_width, gbc);
-        
-        Form_content.add(Form);
-        
-        this.add(Form_content, BorderLayout.CENTER);
+        this.add(Form, BorderLayout.CENTER);
         this.add(Buttons, BorderLayout.SOUTH);
         
         this.setVisible(true);

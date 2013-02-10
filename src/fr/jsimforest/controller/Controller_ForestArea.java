@@ -27,10 +27,12 @@ public class Controller_ForestArea {
         private static int Nbr_infect;
         
         private static int statut;
+        private static boolean save_stat;
 
         
     public Controller_ForestArea() {
-
+        
+        Controller_ForestArea.save_stat = true;
         Controller_ForestArea.statut = 1;
         Controller_ForestArea.name = "Default Forest";
         Controller_ForestArea.step = 0;
@@ -43,7 +45,7 @@ public class Controller_ForestArea {
         }
         
         Controller_ForestArea.ForestAreaTab = fo;
-        this.updatePropWithTab();  
+        Controller_ForestArea.updatePropWithTab();  
         System.out.println(this.TabToString());
     }
     
