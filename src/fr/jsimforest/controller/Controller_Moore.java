@@ -215,7 +215,7 @@ public class Controller_Moore {
     public void evolutionArea(){
         int forestArea[][]=Controller_ForestArea.getForestAreaTab();
         int [][] temp= new int[forestArea.length][forestArea[0].length];
-            
+           
         if(Controller_ForestArea.getNbr_fire()==0 && Controller_ForestArea.getNbr_infect()==0 && Controller_ForestArea.getNbr_ash()==0){
             Controller_ForestArea.setStatut(1);
         }
@@ -227,7 +227,7 @@ public class Controller_Moore {
             if(Controller_ForestArea.getNbr_fire()>0 || Controller_ForestArea.getNbr_ash()>0){
                     Controller_ForestArea.setStatut(3);
             }
-
+        
         for(int i=0; i<temp.length;i++){
             for(int j=0; j<temp[0].length;j++){
                 switch(Controller_ForestArea.getStatut()){
@@ -236,6 +236,11 @@ public class Controller_Moore {
                     case 2:temp[i][j]=setStateInfected(forestArea, i, j);
                         break;
                     case 3: temp[i][j]=setStateFire(forestArea, i, j);
+                        break;
+                    case 4:
+                        temp[i][j]=setStateCellGrowth(forestArea, i, j);
+                       // temp[i][j]=setStateInfected(forestArea, i, j);
+                        temp[i][j]=setStateFire(forestArea, i, j);
                         break;
                 }
             }
@@ -246,4 +251,5 @@ public class Controller_Moore {
         public int getRandom(){
             return (int)(Math.random()*(100000+1-0))+0;
         }
+
 }
