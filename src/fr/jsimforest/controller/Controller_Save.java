@@ -19,6 +19,7 @@ import fr.jsimforest.tools.Utils;
 public class Controller_Save {
     private DAO<Model_Save> connectSaveDAO;
     private ArrayList<Model_Save> saves;
+    private Model_Save save;
     
     public Controller_Save(){
         this.connectSaveDAO = new Model_SaveDAO(Model_Singleton.connectToDB());
@@ -56,6 +57,24 @@ public class Controller_Save {
                this.saves.add(Saves);
            }
         }
+    }
+    
+    public void newSave(Model_Save save) throws SQLException{
+        this.connectSaveDAO.create(save);
+    }
+
+    /**
+     * @return the save
+     */
+    public Model_Save getSave() {
+        return save;
+    }
+
+    /**
+     * @param save the save to set
+     */
+    public void setSave(Model_Save save) {
+        this.save = save;
     }
     
 }

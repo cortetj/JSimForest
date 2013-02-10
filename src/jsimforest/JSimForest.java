@@ -41,7 +41,7 @@ public class JSimForest {
        }
        UIManager.put("TabbedPane.contentBorderInsets", new Insets(0, 0, 0, 0));
 
-       // Window w = new Window();
+       Window w = new Window();
        fr.jsimforest.model.Model_Singleton.connectToDB();
        
        Controller_Save saves = new Controller_Save();
