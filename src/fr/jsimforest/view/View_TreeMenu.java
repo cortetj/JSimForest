@@ -146,7 +146,7 @@ public class View_TreeMenu extends JPanel {
         this.Slide_speed.setMinimum(1);
         this.Slide_speed.setMaximum(5);
         this.Slide_speed.setInverted(true);
-        this.Slide_speed.setValue(5);
+        this.Slide_speed.setValue(1);
         this.Slide_speed.setPaintTicks(true);
         this.Slide_speed.setPaintLabels(true);
         this.Slide_speed.setMajorTickSpacing(1);
