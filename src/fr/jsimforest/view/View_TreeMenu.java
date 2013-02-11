@@ -5,6 +5,7 @@
 package fr.jsimforest.view;
 
 import fr.jsimforest.controller.Controller_Cell;
+import fr.jsimforest.controller.Controller_ForestArea;
 import fr.jsimforest.controller.Controller_Player;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -39,6 +40,7 @@ public class View_TreeMenu extends JPanel {
     private JButton Button_at;
     
     private JCheckBox Check_Border;
+    private JCheckBox Check_ContinueDev;
     private JCheckBox Check_saveStat;
     private JSlider Slide_speed;
     private JSpinner Text_maxStep;
@@ -129,6 +131,22 @@ public class View_TreeMenu extends JPanel {
             }
         });
                 
+        this.Check_ContinueDev = new JCheckBox("Continue development", null, false);
+        this.Check_ContinueDev.setPreferredSize(new Dimension(130,30));
+        this.Check_ContinueDev.addActionListener(new ActionListener() {
+          @Override
+          public void actionPerformed(ActionEvent evt) {
+              if(Check_StepInfinite.isSelected()) {
+                  Controller_ForestArea.setC_develop(true);
+              }
+              else {
+                Text_maxStep.setEnabled(true);
+               Controller_ForestArea.setC_develop(false);
+              }
+          }
+        });
+        
+        
         this.Check_StepInfinite = new JCheckBox("Infinite", null, true);
         this.Check_StepInfinite.setPreferredSize(new Dimension(130,30));
         this.Check_StepInfinite.addActionListener(new ActionListener() {
