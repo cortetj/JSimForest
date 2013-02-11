@@ -97,7 +97,7 @@ public class Model_SaveDAO extends DAO<Model_Save> {
 			return new Model_Save(id, result.getString("name_save"), result.getString("forest_save"), result.getTimestamp("date_save"));
     }
     
-   /* public ArrayList<Model_Save> findNames() throws SQLException{
+   public ArrayList<Model_Save> findNames() throws SQLException{
         ResultSet result = this.connect.createStatement().executeQuery("SELECT name_save, date_save FROM SAVE WHERE 1 GROUP BY name_save ORDER BY date_save DESC");
         ArrayList<Model_Save> saves = new ArrayList<Model_Save>();
         while(result.next()){
@@ -113,5 +113,5 @@ public class Model_SaveDAO extends DAO<Model_Save> {
             saves.add(new Model_Save(result.getInt("id_save"), "", "", result.getTimestamp("date_save")));
         }
         return saves;
-    }*/
+    }
 }

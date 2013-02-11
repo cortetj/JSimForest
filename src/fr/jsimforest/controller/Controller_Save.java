@@ -13,6 +13,8 @@ import fr.jsimforest.model.Model_Stats;
 import fr.jsimforest.model.DAO;
 import fr.jsimforest.model.Model_Singleton;
 import fr.jsimforest.tools.Utils;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 /**
  *
  * @author raff
@@ -63,11 +65,22 @@ public class Controller_Save {
         }  
     }
     
-    public void loadLastSave(){
-        
+    public ArrayList<Model_Save> getSavesNames(){
+        try {
+            return this.save.findNames();
+        } catch (Exception e) {
+            Utils.errorGui(e, "Error can't connect to MySQL db -> function getSavesNames()");
+            return null;
+        }
     }
-    public void loadSaveWithName(){
-                
+    
+    public ArrayList<Model_Save> getSavesByName(String name){
+        try{
+            return this.save.findSavesWith(name);
+        }catch(Exception e){
+            Utils.errorGui(e, "Error can't connect to MySQL db -> function getSavesByName()");
+            return null;
+        }
     }
     
     public void newSave(Model_Save save, ArrayList<Model_Stats> stats) throws SQLException{
