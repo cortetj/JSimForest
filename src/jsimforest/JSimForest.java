@@ -65,8 +65,8 @@ public class JSimForest {
        
        /////////////// ADD SAVE WITH STATS ///////////////////
        
-    /* Model_Save savegame = new Model_Save(1, "simu16", "fqefvdsf");
-     ArrayList<Model_Stats> stats = new ArrayList<Model_Stats>();
+     Model_Save savegame = new Model_Save(1, "simu16", "fqefvdsf");
+    /* ArrayList<Model_Stats> stats = new ArrayList<Model_Stats>();
      stats.add(new Model_Stats(0, 174, 12, 13, 14, 114, 232, 132,1521,0));
      stats.add(new Model_Stats(0, 174, 12, 13, 14, 114, 232, 132,1521,0));
      stats.add(new Model_Stats(0, 174, 12, 13, 14, 114, 232, 132,1521,0));

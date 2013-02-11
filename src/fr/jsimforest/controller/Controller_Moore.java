@@ -277,6 +277,7 @@ public class Controller_Moore {
     public void evolutionArea(){
         int forestArea[][]=Controller_ForestArea.getForestAreaTab();
         int [][] temp= new int[forestArea.length][forestArea[0].length];
+        boolean stateAll=false;
             
         if(Controller_ForestArea.getNbr_fire()==0 && Controller_ForestArea.getNbr_infect()==0 && Controller_ForestArea.getNbr_ash()==0){
             Controller_ForestArea.setStatut(1);
@@ -286,9 +287,15 @@ public class Controller_Moore {
                 Controller_ForestArea.setStatut(2);
             }
         else
-            if(Controller_ForestArea.getNbr_fire()>0 || Controller_ForestArea.getNbr_ash()>0){
-                    Controller_ForestArea.setStatut(3);
+            if((Controller_ForestArea.getNbr_fire()>0 || Controller_ForestArea.getNbr_ash()>0)&&stateAll==false){
+                    Controller_ForestArea.setStatut(4);
             }
+        else
+            if((Controller_ForestArea.getNbr_fire()>0 || Controller_ForestArea.getNbr_ash()>0)&&stateAll==true){
+                System.out.println("CA PASSE ");
+                Controller_ForestArea.setStatut(4);
+            }
+        
 
         for(int i=0; i<temp.length;i++){
             for(int j=0; j<temp[0].length;j++){
@@ -298,6 +305,8 @@ public class Controller_Moore {
                     case 2:temp[i][j]=setStateInfected(forestArea, i, j);
                         break;
                     case 3: temp[i][j]=setStateFire(forestArea, i, j);
+                        break;
+                    case 4: temp[i][j]=setStateAll(forestArea, i, j);
                         break;
                 }
             }
