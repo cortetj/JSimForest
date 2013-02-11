@@ -5,6 +5,7 @@
 package fr.jsimforest.view;
 
 import fr.jsimforest.controller.Controller_ForestArea;
+import fr.jsimforest.model.Model_Stats;
 import fr.jsimforest.tools.Utils_ExportCSV;
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
@@ -193,6 +194,26 @@ public class View_Stats extends JPanel {
           Model_stat.setRowCount(0);
           Model_stat_prc.setRowCount(0);
           Model_stat_actPrc.setRowCount(0);
+    }
+    
+    public static ArrayList<Model_Stats> exportStats() {
+        
+        ArrayList<Model_Stats> stats_list = new ArrayList();
+          for(int i=0; i<Model_stat.getRowCount(); i++) {
+              stats_list.add(new Model_Stats(0, 
+                      Integer.parseInt(Table_Stat.getValueAt(i, 0).toString()), 
+                      Integer.parseInt(Table_Stat.getValueAt(i, 1).toString()), 
+                      Integer.parseInt(Table_Stat.getValueAt(i, 2).toString()), 
+                      Integer.parseInt(Table_Stat.getValueAt(i, 3).toString()), 
+                      Integer.parseInt(Table_Stat.getValueAt(i, 4).toString()), 
+                      Integer.parseInt(Table_Stat.getValueAt(i, 5).toString()), 
+                      Integer.parseInt(Table_Stat.getValueAt(i, 6).toString()), 
+                      Integer.parseInt(Table_Stat.getValueAt(i, 7).toString()), 
+                      0
+              ));
+          }
+          
+        return stats_list;
     }
 
     /**

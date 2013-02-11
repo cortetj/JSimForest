@@ -41,7 +41,7 @@ public class Model_Singleton{
                     Document doc = dBuilder.parse(fXmlFile);
                     doc.getDocumentElement().normalize();
                     
-                    Class.forName("org.sqlite.JDBC");	
+                    Class.forName("com.mysql.jdbc.Driver");	
                     Model_Singleton.connectDB =DriverManager.getConnection(
                            doc.getElementsByTagName("url").item(0).getTextContent(),
                            doc.getElementsByTagName("login").item(0).getTextContent(),

@@ -4,8 +4,8 @@
  */
 package fr.jsimforest.model;
 import java.sql.SQLException;
-import java.util.Date;
 import java.util.ArrayList;
+import java.util.Date;
 
 
 /**
@@ -21,13 +21,21 @@ public class Model_Save {
     
     public Model_Save(){}
     
-    public Model_Save(int id, String name, String forest) throws SQLException{
+    public Model_Save(int id, String name, String forest, Date date) throws SQLException{
         this.id_save=id;
         this.name_save=name;
-        //this.date=date;
+        this.date=date;
         this.forest_save=forest;
         this.stats=this.loadStats();
     }
+    
+    public Model_Save(int id, String name, String forest) throws SQLException{
+        this.id_save=id;
+        this.name_save=name;
+        this.forest_save=forest;
+        this.stats=this.loadStats();
+    }
+    
     private ArrayList<Model_Stats> loadStats() throws SQLException{
 		return new Model_SaveDAO(Model_Singleton.connectToDB()).findListStats(this);
 	}

@@ -6,6 +6,9 @@ package fr.jsimforest.view;
 
 import fr.jsimforest.controller.Controller_ForestArea;
 import fr.jsimforest.controller.Controller_Player;
+import fr.jsimforest.controller.Controller_Save;
+import fr.jsimforest.model.Model_Save;
+import fr.jsimforest.model.Model_Stats;
 import fr.jsimforest.tools.Utils_ExportJSM;
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -15,8 +18,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -144,6 +149,14 @@ public class View_ActionMenu extends JPanel{
         this.Button_save.addActionListener(new ActionListener() {
           @Override
           public void actionPerformed(ActionEvent evt) {
+                 Controller_Save ctr_save = new Controller_Save();
+                 
+                try {
+                    ctr_save.newSave(new Model_Save(0, Controller_ForestArea.getName(), Controller_ForestArea.TabToString()), View_Stats.exportStats());
+                } catch (SQLException ex) {
+                    Logger.getLogger(View_ActionMenu.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                
                  JOptionPane.showMessageDialog(null, "Forest save");
           }
         });
@@ -158,7 +171,11 @@ public class View_ActionMenu extends JPanel{
           @Override
           public void actionPerformed(ActionEvent evt) {
                 Controller_Player.stopPlayer();
-                Window_LoadForest Window_new = new Window_LoadForest();
+                try {
+                    Window_LoadForest Window_new = new Window_LoadForest();
+                } catch (SQLException ex) {
+                    Logger.getLogger(View_ActionMenu.class.getName()).log(Level.SEVERE, null, ex);
+                }
           }
         });
         
