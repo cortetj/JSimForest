@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import fr.jsimforest.model.Model_Save;
 import fr.jsimforest.model.DAO;
 import fr.jsimforest.tools.Utils;
+import java.sql.PreparedStatement;
 import java.util.Date;
 /**
  *
@@ -24,23 +25,31 @@ public class Model_SaveDAO extends DAO<Model_Save> {
     }
     
     public void creatE(Model_Save save, ArrayList<Model_Stats> stats) throws SQLException{
-        this.connect.createStatement().execute("INSERT INTO SAVE (name_save, forest_save) VALUES('"+
-                                                        save.getName_save()+"','"+
-                                                        save.getForest_save()+"')");
         
-        ResultSet result =this.connect.createStatement().executeQuery("SELECT * FROM "+
-                                                    "SAVE ORDER BY id_save DESC LIMIT 1");
+        int key = 0;
         
+        PreparedStatement prepareInsertSave = this.connect.prepareStatement("INSERT INTO SAVE (name_save, forest_save) VALUES(?, ?)", PreparedStatement.RETURN_GENERATED_KEYS);
+            prepareInsertSave.setString(1, save.getName_save());
+            prepareInsertSave.setString(2, save.getForest_save());
+            prepareInsertSave.executeUpdate();
+           
+        ResultSet rs = prepareInsertSave.getGeneratedKeys();
+        
+        if (rs != null && rs.next()) {
+           key = rs.getInt(1);
+        }
         
         for(int i=0; i<stats.size(); i++){
-        this.connect.createStatement().execute("INSERT INTO STATS (t, stat_empty, stat_youngplant, stat_youngtree,stat_tree, stat_fire"+
+        this.connect.createStatement().execute("INSERT INTO STATS (t, stat_empty, stat_youngplant, stat_youngtree, stat_tree, stat_fire"+
                                                ", stat_ash, stat_infecte, id_save) VALUES('"+stats.get(i).getT()+
                                                "','"+stats.get(i).getStat_empty()+"','"+stats.get(i).getStat_youngplant()+
                                                "','"+stats.get(i).getStat_youngtree()+"','"+stats.get(i).getStat_tree()+
                                                "','"+stats.get(i).getStat_fire()+"','"+stats.get(i).getStat_ash()+
-                                               "','"+stats.get(i).getStat_infecte()+"','"+result.getInt(1)+"')");
+                                               "','"+stats.get(i).getStat_infecte()+"','"+ key +"')");
         }    
-        this.connect.close();
+        
+        prepareInsertSave.close();
+        //this.connect.close();
     }
     
     @Override
@@ -51,7 +60,19 @@ public class Model_SaveDAO extends DAO<Model_Save> {
     
     @Override
     public int nbEntries() throws SQLException{
-       return this.connect.createStatement().executeQuery("SELECT COUNT (*) FROM SAVE").getInt(1);
+        
+        int key = 0;
+        
+        PreparedStatement prepareNbSave = this.connect.prepareStatement("SELECT COUNT(id_save) FROM SAVE");
+        //prepareInsertSave.executeUpdate();
+           
+        ResultSet rs = prepareNbSave.executeQuery();
+        
+        if (rs != null && rs.next()) {
+           key = rs.getInt(1);
+        }
+        
+       return key;
     }
 
    
@@ -73,7 +94,7 @@ public class Model_SaveDAO extends DAO<Model_Save> {
 			if(!result.next()){
 				return null;
 			}
-	 		return new Model_Save(id, result.getString("name_save"), result.getString("forest_save"));
+			return new Model_Save(id, result.getString("name_save"), result.getString("forest_save"), result.getTimestamp("date_save"));
     }
     
    /* public ArrayList<Model_Save> findNames() throws SQLException{

@@ -5,6 +5,7 @@
 package fr.jsimforest.view;
 
 import fr.jsimforest.controller.Controller_ForestArea;
+import fr.jsimforest.model.Model_Stats;
 import fr.jsimforest.tools.Utils_ExportCSV;
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
@@ -12,8 +13,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JSplitPane;
@@ -26,9 +29,9 @@ import javax.swing.table.DefaultTableModel;
  */
 public class View_Stats extends JPanel {
         
-    private JTable Table_Stat;
-    private JTable Table_Stat_prc;
-    private JTable Table_Stat_actPrc;
+    private static JTable Table_Stat;
+    private static JTable Table_Stat_prc;
+    private static JTable Table_Stat_actPrc;
     
     private JSplitPane split, split2;
     private static DefaultTableModel Model_stat;
@@ -85,15 +88,21 @@ public class View_Stats extends JPanel {
         View_Stats.Model_stat_prc = new DefaultTableModel(data_prc, col_prc);
         View_Stats.Model_stat_actPrc = new DefaultTableModel(data_prc, col);
         
-        this.Table_Stat = new JTable(View_Stats.Model_stat);
-        this.Table_Stat_prc = new JTable(View_Stats.Model_stat_prc);
-        this.Table_Stat_actPrc = new JTable(View_Stats.Model_stat_actPrc);
+        View_Stats.Table_Stat = new JTable(View_Stats.Model_stat);
+        View_Stats.Table_Stat_prc = new JTable(View_Stats.Model_stat_prc);
+        View_Stats.Table_Stat_actPrc = new JTable(View_Stats.Model_stat_actPrc);
         
         this.exportCSV = new JButton("Export to CSV");
         this.exportCSV.addActionListener(new ActionListener() {
           @Override
           public void actionPerformed(ActionEvent evt) {
-                Utils_ExportCSV.Utils_ExportCSV(Table_Stat, Controller_ForestArea.getName() + dateFormat.format(new Date()) +".csv");
+              try {
+                    Utils_ExportCSV.Utils_ExportCSV(getTable_Stat(), Controller_ForestArea.getName() + dateFormat.format(new Date()) +".csv");
+                    JOptionPane.showMessageDialog(null, "File \"" + Controller_ForestArea.getName() + dateFormat.format(new Date()) +".csv \" Export");  
+              } catch(Exception e) {
+                    JOptionPane.showMessageDialog(null, "Impossible export table : "+ e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+              }
+
           }
         });
         
@@ -111,9 +120,9 @@ public class View_Stats extends JPanel {
         buttons.add(this.deleteRows);
         buttons.add(this.exportCSV);
         
-        Stat_panel.add(new JScrollPane(this.Table_Stat));
-        Stat_panel_prc.add(new JScrollPane(this.Table_Stat_prc));
-        Stat_panel_actPrc.add(new JScrollPane(this.Table_Stat_actPrc));
+        Stat_panel.add(new JScrollPane(View_Stats.getTable_Stat()));
+        Stat_panel_prc.add(new JScrollPane(View_Stats.Table_Stat_prc));
+        Stat_panel_actPrc.add(new JScrollPane(View_Stats.Table_Stat_actPrc));
 
         split2 = new JSplitPane(JSplitPane.VERTICAL_SPLIT, Stat_panel_prc, Stat_panel_actPrc);
         split2.setDividerLocation(java.awt.Toolkit.getDefaultToolkit().getScreenSize().height/2);
@@ -155,12 +164,56 @@ public class View_Stats extends JPanel {
         
         View_Stats.Model_stat.addRow(data);
         View_Stats.Model_stat_prc.addRow(data_prc);
+    } 
+    
+    public static void importStat(ArrayList<String> stats) {
+        
+        Object[] data = new Object[8];
+        Object[] data_prc = new Object[8];
+        
+        for(int i=1;i<stats.size();i++) {
+            try {
+                data = stats.get(i).split(",");
+                for(int j=0;j<data.length;j++) {
+                   int prc = Integer.parseInt(data[j].toString());
+                   prc = prc*100/(Controller_ForestArea.getWidth()*Controller_ForestArea.getHeight());
+                   data_prc[j] = prc;
+                }
+                
+            } catch (Exception e) {
+                System.out.println(e.toString());
+            }
+            
+            View_Stats.Model_stat.addRow(data);
+            View_Stats.Model_stat_prc.addRow(data_prc);
+            
+        }
     }
     
     public static void ClearTable() {
           Model_stat.setRowCount(0);
           Model_stat_prc.setRowCount(0);
           Model_stat_actPrc.setRowCount(0);
+    }
+    
+    public static ArrayList<Model_Stats> exportStats() {
+        
+        ArrayList<Model_Stats> stats_list = new ArrayList();
+          for(int i=0; i<Model_stat.getRowCount(); i++) {
+              stats_list.add(new Model_Stats(0, 
+                      Integer.parseInt(Table_Stat.getValueAt(i, 0).toString()), 
+                      Integer.parseInt(Table_Stat.getValueAt(i, 1).toString()), 
+                      Integer.parseInt(Table_Stat.getValueAt(i, 2).toString()), 
+                      Integer.parseInt(Table_Stat.getValueAt(i, 3).toString()), 
+                      Integer.parseInt(Table_Stat.getValueAt(i, 4).toString()), 
+                      Integer.parseInt(Table_Stat.getValueAt(i, 5).toString()), 
+                      Integer.parseInt(Table_Stat.getValueAt(i, 6).toString()), 
+                      Integer.parseInt(Table_Stat.getValueAt(i, 7).toString()), 
+                      0
+              ));
+          }
+          
+        return stats_list;
     }
 
     /**
@@ -175,6 +228,20 @@ public class View_Stats extends JPanel {
      */
     public static void setSave_stat(boolean aSave_stat) {
         save_stat = aSave_stat;
+    }
+
+    /**
+     * @return the Table_Stat
+     */
+    public static JTable getTable_Stat() {
+        return Table_Stat;
+    }
+
+    /**
+     * @param Table_Stat the Table_Stat to set
+     */
+    public void setTable_Stat(JTable Table_Stat) {
+        View_Stats.Table_Stat = Table_Stat;
     }
 
 

@@ -28,7 +28,7 @@ public class Controller_Save {
         this.save = new Model_SaveDAO(Model_Singleton.connectToDB());
         try{
             this.saves = new ArrayList<Model_Save>();
-            this.loadSaves();
+            //this.loadSaves();
         }catch(Exception e){
             Utils.errorGui(e, "Error data access..");
         }
@@ -50,7 +50,7 @@ public class Controller_Save {
     }
     
     //INNER FUNCTIONS
-    private void loadSaves() throws SQLException{
+    public void loadSaves() throws SQLException{
         int len=this.connectSaveDAO.nbEntries();
         System.out.println("NB ENTRIES <=> "+len);
         int i=0;

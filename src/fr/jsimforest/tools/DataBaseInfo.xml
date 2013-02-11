@@ -6,7 +6,7 @@ and open the template in the editor.
 
 
 <root>
-    <url>jdbc:sqlite:dbJSim.db3</url>
+    <url>jdbc:mysql://localhost/DB_JSimForest</url>
     <login>root</login>
-    <password></password>
+    <password>root</password>
 </root>

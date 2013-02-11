@@ -97,8 +97,9 @@ public class View_ForestArea extends JPanel{
         for(int i=0; i<Controller_ForestArea.getHeight(); i++) {
                         
             for(int j=0; j<Controller_ForestArea.getWidth(); j++) {
-                
+                                
                 switch(Controller_ForestArea.getForestAreaTab()[i][j]) {
+                    
                     
                     case 0 : this.Cells[i][j].setBackground(Enum_Cell.EMPTY.getColor());
                         break;
