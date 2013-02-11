@@ -164,8 +164,9 @@ public class Controller_Moore {
     }
     
     private int setStateAll(int forestArea[][], int y, int x){
-         int nbTree=0;
+        int nbTree=0;
         int nbYoungTree=0;
+        boolean fire=false;
             
         for(int i=0; i<getNeighboorMoore(y, x, forestArea).size(); i++){
             if(getNeighboorMoore(y, x, forestArea).get(i)==3){
@@ -175,7 +176,7 @@ public class Controller_Moore {
                 nbYoungTree++;
             }
         }
-        boolean fire=false;
+        
         
         for(int i=0; i<getNeighboorMoore(y, x, forestArea).size(); i++){
             if(getNeighboorMoore(y, x, forestArea).get(i)==4){
@@ -277,7 +278,6 @@ public class Controller_Moore {
     public void evolutionArea(){
         int forestArea[][]=Controller_ForestArea.getForestAreaTab();
         int [][] temp= new int[forestArea.length][forestArea[0].length];
-        boolean stateAll=false;
             
         if(Controller_ForestArea.getNbr_fire()==0 && Controller_ForestArea.getNbr_infect()==0 && Controller_ForestArea.getNbr_ash()==0){
             Controller_ForestArea.setStatut(1);
@@ -287,11 +287,11 @@ public class Controller_Moore {
                 Controller_ForestArea.setStatut(2);
             }
         else
-            if((Controller_ForestArea.getNbr_fire()>0 || Controller_ForestArea.getNbr_ash()>0)&&stateAll==false){
+            if((Controller_ForestArea.getNbr_fire()>0 || Controller_ForestArea.getNbr_ash()>0)&& Controller_ForestArea.isC_develop()==false){
                     Controller_ForestArea.setStatut(4);
             }
         else
-            if((Controller_ForestArea.getNbr_fire()>0 || Controller_ForestArea.getNbr_ash()>0)&&stateAll==true){
+            if((Controller_ForestArea.getNbr_fire()>0 || Controller_ForestArea.getNbr_ash()>0)&&Controller_ForestArea.isC_develop()==true){
                 System.out.println("CA PASSE ");
                 Controller_ForestArea.setStatut(4);
             }
