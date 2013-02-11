@@ -63,6 +63,13 @@ public class Controller_Save {
         }  
     }
     
+    public void loadLastSave(){
+        
+    }
+    public void loadSaveWithName(){
+                
+    }
+    
     public void newSave(Model_Save save, ArrayList<Model_Stats> stats) throws SQLException{
       this.save.creatE(save, stats);
     }
