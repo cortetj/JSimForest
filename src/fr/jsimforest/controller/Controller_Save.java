@@ -9,6 +9,7 @@ import java.util.ArrayList;
 
 import fr.jsimforest.model.Model_SaveDAO;
 import fr.jsimforest.model.Model_Save;
+import fr.jsimforest.model.Model_Stats;
 import fr.jsimforest.model.DAO;
 import fr.jsimforest.model.Model_Singleton;
 import fr.jsimforest.tools.Utils;
@@ -18,10 +19,13 @@ import fr.jsimforest.tools.Utils;
  */
 public class Controller_Save {
     private DAO<Model_Save> connectSaveDAO;
+    private DAO<Model_Stats> connectStatsDAO;
     private ArrayList<Model_Save> saves;
+    private Model_SaveDAO save;
     
     public Controller_Save(){
         this.connectSaveDAO = new Model_SaveDAO(Model_Singleton.connectToDB());
+        this.save = new Model_SaveDAO(Model_Singleton.connectToDB());
         try{
             this.saves = new ArrayList<Model_Save>();
             this.loadSaves();
@@ -48,14 +52,36 @@ public class Controller_Save {
     //INNER FUNCTIONS
     private void loadSaves() throws SQLException{
         int len=this.connectSaveDAO.nbEntries();
-        System.out.println(len);
+        System.out.println("NB ENTRIES <=> "+len);
         int i=0;
         Model_Save Saves;
         while(++i <len +1){
            if((Saves=this.connectSaveDAO.find(i))!=null){
                this.saves.add(Saves);
+               System.out.println("VALUES <=> "+Saves.getName_save());
            }
-        }
+        }  
+    }
+    
+    public void newSave(Model_Save save, ArrayList<Model_Stats> stats) throws SQLException{
+      this.save.creatE(save, stats);
+    }
+    
+    public void DeleteSave(Model_Save save) throws SQLException{
+    }
+
+    /**
+     * @return the save
+     */
+    public Model_SaveDAO getSave() {
+        return save;
+    }
+
+    /**
+     * @param save the save to set
+     */
+    public void setSave(Model_SaveDAO save) {
+        this.save = save;
     }
     
 }

@@ -10,6 +10,7 @@ package fr.jsimforest.model;
  */
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public abstract class DAO<T> {
     
@@ -28,7 +29,6 @@ public abstract class DAO<T> {
      * @param obj
      * @return
      */
-    public abstract void create(T obj) throws SQLException;
     /**
      * Méthode pour effacer
      * @param obj
@@ -41,15 +41,7 @@ public abstract class DAO<T> {
      * @return
 */
     
-    public abstract void select(T obj) throws SQLException;
-    
-        
-    /**
-     *
-     * @param id
-     * @return
-     * @throws SQLException
-     */
+
     public abstract T find(int id) throws SQLException;
     
     public abstract int nbEntries() throws SQLException;

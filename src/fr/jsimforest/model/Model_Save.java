@@ -5,6 +5,8 @@
 package fr.jsimforest.model;
 import java.sql.SQLException;
 import java.util.Date;
+import java.util.ArrayList;
+
 
 /**
  *
@@ -15,23 +17,19 @@ public class Model_Save {
     private String name_save;
     private Date date;
     private String forest_save;
-    private int id_stat;
-    private Model_Stats stats = new Model_Stats();
+    private ArrayList<Model_Stats> stats = new ArrayList<Model_Stats>();
     
     public Model_Save(){}
     
-    public Model_Save(int id, String name, Date date, String forest, int  foreign_id) throws SQLException{
+    public Model_Save(int id, String name, String forest) throws SQLException{
         this.id_save=id;
         this.name_save=name;
-        this.date=date;
+        //this.date=date;
         this.forest_save=forest;
-        this.id_stat=foreign_id;
         this.stats=this.loadStats();
-        
-
     }
-    private Model_Stats loadStats() throws SQLException{
-		return new Model_StatsDAO(Model_Singleton.connectToDB()).find(this.getId_stat());
+    private ArrayList<Model_Stats> loadStats() throws SQLException{
+		return new Model_SaveDAO(Model_Singleton.connectToDB()).findListStats(this);
 	}
 
     /**
@@ -91,30 +89,21 @@ public class Model_Save {
     }
 
     /**
-     * @return the id_stat
-     */
-    public int getId_stat() {
-        return id_stat;
-    }
-
-    /**
-     * @param id_stat the id_stat to set
-     */
-    public void setId_stat(int id_stat) {
-        this.id_stat = id_stat;
-    }
-
-    /**
      * @return the stats
      */
-    public Model_Stats getStats() {
+    public ArrayList<Model_Stats> getStats() {
         return stats;
     }
 
     /**
      * @param stats the stats to set
      */
-    public void setStats(Model_Stats stats) {
+    public void setStats(ArrayList<Model_Stats> stats) {
         this.stats = stats;
     }
+
+    /**
+     * @return the id_stat
+     */
+   
 }

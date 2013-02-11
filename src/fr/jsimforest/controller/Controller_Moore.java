@@ -13,7 +13,7 @@ import java.util.ArrayList;
 public class Controller_Moore {
       
 
-     public ArrayList<Integer> getNeighboorMoore(int _y, int _x, int[][] forestArea) {
+     private ArrayList<Integer> getNeighboorMoore(int _y, int _x, int[][] forestArea) {
         ArrayList<Integer> neighboor=new ArrayList<Integer>();
         if (_y < 0 || _y >= forestArea.length || _x < 0 || _x >= forestArea[0].length) {
             return neighboor;
@@ -48,7 +48,7 @@ public class Controller_Moore {
         }
     }
      
-    public ArrayList<Integer> getNeighboorVanNeumann(int _y, int _x, int[][] forestArea) {
+    private ArrayList<Integer> getNeighboorVanNeumann(int _y, int _x, int[][] forestArea) {
         ArrayList<Integer> neighboor=new ArrayList<Integer>();
          if (_y < 0 || _y >= forestArea.length || _x < 0 || _x >= forestArea[0].length) {
             return neighboor;
@@ -106,6 +106,17 @@ public class Controller_Moore {
     }
         
     private int setStateFire(int forestArea[][], int y, int x){
+        int nbTree=0;
+        int nbYoungTree=0;
+            
+        for(int i=0; i<getNeighboorMoore(y, x, forestArea).size(); i++){
+            if(getNeighboorMoore(y, x, forestArea).get(i)==3){
+                nbTree++;
+            }
+            else if(getNeighboorMoore(y, x, forestArea).get(i)==2 || getNeighboorMoore(y, x, forestArea).get(i)==7){
+                nbYoungTree++;
+            }
+        }
         boolean fire=false;
         
         for(int i=0; i<getNeighboorMoore(y, x, forestArea).size(); i++){
@@ -114,6 +125,8 @@ public class Controller_Moore {
             }
         }
         switch(forestArea[y][x]){
+            case 0:
+                break;
             case 1:
                 if(fire){
                     if(getRandom()<25000){
@@ -146,6 +159,70 @@ public class Controller_Moore {
                     }
                 }
                 break;
+        }
+        return forestArea[y][x];
+    }
+    
+    private int setStateAll(int forestArea[][], int y, int x){
+         int nbTree=0;
+        int nbYoungTree=0;
+            
+        for(int i=0; i<getNeighboorMoore(y, x, forestArea).size(); i++){
+            if(getNeighboorMoore(y, x, forestArea).get(i)==3){
+                nbTree++;
+            }
+            else if(getNeighboorMoore(y, x, forestArea).get(i)==2 || getNeighboorMoore(y, x, forestArea).get(i)==7){
+                nbYoungTree++;
+            }
+        }
+        boolean fire=false;
+        
+        for(int i=0; i<getNeighboorMoore(y, x, forestArea).size(); i++){
+            if(getNeighboorMoore(y, x, forestArea).get(i)==4){
+                fire=true;
+            }
+        }
+        switch(forestArea[y][x]){
+            case 0:
+                if ( nbTree >= 2 || nbYoungTree >= 3 || (nbTree == 1 && nbYoungTree == 2)) {
+                    return 1;
+                }
+                return forestArea[y][x];
+            case 1:
+                if(fire){
+                    if(getRandom()<25000){
+                        return 4;
+                    }
+                }else
+                    if ((nbYoungTree+nbTree)<=3){
+                    return 2;
+                }
+                return forestArea[y][x];
+            case 2:
+                if(fire){
+                    if(getRandom()<50000){
+                        return 4;
+                    }
+                }else
+                    return 7;
+            case 3:
+                if(fire){
+                    if(getRandom()<75000){
+                        return 4;
+                    }
+                }else
+                    return forestArea[y][x];
+            case 4:
+                return 6;
+            case 6:
+                return 0;
+            case 7:
+                if(fire){
+                    if(getRandom()<50000){
+                        return 4;
+                    }
+                }else
+                    return 3;
         }
         return forestArea[y][x];
     }
@@ -232,7 +309,7 @@ public class Controller_Moore {
   
     } 
 
-        public int getRandom(){
+        private int getRandom(){
             return (int)(Math.random()*(100000+1-0))+0;
         }
 }
