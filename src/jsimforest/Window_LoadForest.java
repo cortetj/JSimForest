@@ -14,6 +14,8 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JSplitPane;
 import javax.swing.JTable;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -77,6 +79,17 @@ public class Window_LoadForest extends JFrame {
         this.Model_names = new DefaultTableModel(data, col_names);
         this.Table_loads = new JTable(Model_loads);
         this.Table_names = new JTable(Model_names);
+        
+        this.Table_names.getSelectionModel().addListSelectionListener(new
+            ListSelectionListener() { 
+
+            @Override
+            public void valueChanged(ListSelectionEvent lse) {
+                System.out.println();
+            }
+
+        });
+
         
         
         
