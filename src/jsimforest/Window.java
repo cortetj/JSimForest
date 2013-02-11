@@ -93,7 +93,7 @@ public class Window extends JFrame{
         this.forestArea.zoomout();
     }
 
-    void newForest() {
+    public void newForest() {
         this.forestArea.createGrid();
         View_StatMenu.updateLabelStat();
     }

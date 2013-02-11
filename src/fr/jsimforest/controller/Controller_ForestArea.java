@@ -4,6 +4,12 @@
  */
 package fr.jsimforest.controller;
 
+import fr.jsimforest.view.View_Stats;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import java.util.Scanner;
+
 /**
  *
  * @author EggMan
@@ -65,6 +71,83 @@ public class Controller_ForestArea {
         Controller_ForestArea.updatePropWithTab();
     }
     
+    public static void CreatTabwithFile(File file) throws FileNotFoundException {
+                
+        Scanner scanner=new Scanner(file);
+        
+        ArrayList<String> stats = new ArrayList();
+        String line;
+        // On boucle sur chaque champ detecté`
+        if (scanner.hasNextLine()) {
+            line = scanner.nextLine();
+            Controller_ForestArea.CreatTabwithString(line);
+        }
+        
+        while (scanner.hasNextLine()) {
+            line = scanner.nextLine();
+            stats.add(line);
+        }
+        View_Stats.importStat(stats);
+        scanner.close();
+
+        Controller_ForestArea.setName(file.getName());
+        
+        int fo[][] = new int[height][width];
+        
+        for(int i=0; i<height;i++) {
+            for(int j=0; j<width; j++) {
+                fo[i][j] = 0;
+            }
+        }
+        
+    }
+    
+    public static void CreatTabwithString(String forest) {
+       
+        int HEIGHT = 1;
+        int WIDTH = 0;
+        
+        for(int i=0; i<forest.length();i++) {            
+            if(forest.charAt(i) == 'n') {
+                HEIGHT++;
+                WIDTH = 0;
+            }
+            WIDTH++;
+        }
+        WIDTH--;
+         
+
+        int fo[][] = new int[HEIGHT][WIDTH];
+        int x = 0;
+        int y = 0;
+        
+        for(int i=0; i<forest.length();i++) {
+            System.out.println(forest.charAt(i));
+            if(forest.charAt(i) == 'n') {
+                y++;
+                x=0;
+            }
+            else {
+                String c = ""+forest.charAt(i);
+                fo[y][x] = Integer.parseInt(c);
+                x++;
+            }
+        
+            
+        }
+        
+      for (int i = 0; i<HEIGHT; i++) {
+            for (int j = 0; j<WIDTH; j++) {
+                System.out.print(fo[i][j]);
+            }
+            System.out.println("");
+        }
+        
+        Controller_ForestArea.ForestAreaTab = fo;
+        
+        Controller_ForestArea.updatePropWithTab();
+    }
+    
     public static void updatePropWithTab() {
         
         Controller_ForestArea.width = 0;
@@ -121,7 +204,7 @@ public class Controller_ForestArea {
 
     }
 
-    public String TabToString()
+    public static String TabToString()
     {
         String str = new String();
         for (int i = 0; i<Controller_ForestArea.getHeight(); i++) {

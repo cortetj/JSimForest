@@ -4,14 +4,20 @@
  */
 package fr.jsimforest.view;
 
+import fr.jsimforest.controller.Controller_ForestArea;
 import fr.jsimforest.controller.Controller_Player;
+import fr.jsimforest.tools.Utils_ExportJSM;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridLayout;
-import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
@@ -20,8 +26,6 @@ import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.UIManager;
-import javax.swing.UnsupportedLookAndFeelException;
 import jsimforest.Window;
 import jsimforest.Window_LoadForest;
 import jsimforest.Window_NewForest;
@@ -42,6 +46,7 @@ public class View_ActionMenu extends JPanel{
     private JButton Button_fast;
     private JButton Button_zoomin;
     private JButton Button_zoomout;
+    private JButton Button_export;
     
     private static JLabel step;
     
@@ -50,6 +55,7 @@ public class View_ActionMenu extends JPanel{
     
     public View_ActionMenu(final Window parent) {
 
+        final DateFormat dateFormat = new SimpleDateFormat("yyyyMMdd_HHmm");
         JPanel separator = new JPanel();
         separator.setOpaque(false);
         JPanel lb = new JPanel();
@@ -73,12 +79,30 @@ public class View_ActionMenu extends JPanel{
         this.Button_new.setBorderPainted(false);
         this.Button_new.setContentAreaFilled(false);
         this.Button_new.setPreferredSize(new Dimension(71, 33));
-        //this.Button_new.setBackground(Color.decode("#A9A9A9"));
         this.Button_new.addActionListener(new ActionListener() {
           @Override
           public void actionPerformed(ActionEvent evt) {
                  Controller_Player.stopPlayer();
                  Window_NewForest Window_new = new Window_NewForest(parent);
+          }
+        });
+        
+        ImageIcon Ico_export = new ImageIcon("img/ico_export.png");        
+        this.Button_export = new JButton(Ico_export);
+        this.Button_export.setOpaque(false);
+        this.Button_export.setBorderPainted(false);
+        this.Button_export.setContentAreaFilled(false);
+        this.Button_export.setPreferredSize(new Dimension(78, 33));
+        this.Button_export.addActionListener(new ActionListener() {
+          @Override
+          public void actionPerformed(ActionEvent evt) {
+                
+              try {
+                     Utils_ExportJSM.Utils_ExportJSM(View_Stats.getTable_Stat(), Controller_ForestArea.getName() + dateFormat.format(new Date()) +".jsf", Controller_ForestArea.TabToString());
+                    JOptionPane.showMessageDialog(null, "File \"" + Controller_ForestArea.getName() + dateFormat.format(new Date()) +".jsf \" Export");  
+              } catch(Exception e) {
+                    JOptionPane.showMessageDialog(null, "Impossible export Forest : "+ e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+              }
           }
         });
 
@@ -92,7 +116,21 @@ public class View_ActionMenu extends JPanel{
           @Override
           public void actionPerformed(ActionEvent evt) {
                 Controller_Player.stopPlayer();
-                JFileChooser fc = new JFileChooser();
+                final JFileChooser fc = new JFileChooser();
+                fc.addChoosableFileFilter(new JSFFilter());
+                fc.addActionListener(new ActionListener() {
+
+                  @Override
+                  public void actionPerformed(ActionEvent ae) {
+                        try {
+                            Controller_ForestArea.CreatTabwithFile(fc.getSelectedFile());
+                            parent.newForest();
+                        } catch (FileNotFoundException ex) {
+                            Logger.getLogger(View_ActionMenu.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                  }
+                    
+                });
                 fc.showOpenDialog(fc);
           }
         });
@@ -209,6 +247,7 @@ public class View_ActionMenu extends JPanel{
         
         lb.add(this.Button_new);
         lb.add(this.Button_open);
+        lb.add(this.Button_export);
         lb.add(this.Button_save);
         lb.add(this.Button_load);
 
@@ -256,4 +295,17 @@ public class View_ActionMenu extends JPanel{
     public static void setPlayer(Controller_Player aPlayer) {
         player = aPlayer;
     }
+    
+    class JSFFilter extends javax.swing.filechooser.FileFilter {
+        @Override
+          public boolean accept(File f) {
+
+            return f.isFile() && f.getName().toLowerCase().endsWith(".jsf") || f.isDirectory();
+          }
+
+          public String getDescription() {
+            return "*.csv";
+          }
+    }
+
 }
