@@ -288,11 +288,10 @@ public class Controller_Moore {
             }
         else
             if((Controller_ForestArea.getNbr_fire()>0 || Controller_ForestArea.getNbr_ash()>0)&& Controller_ForestArea.isC_develop()==false){
-                    Controller_ForestArea.setStatut(4);
+                    Controller_ForestArea.setStatut(3);
             }
         else
             if((Controller_ForestArea.getNbr_fire()>0 || Controller_ForestArea.getNbr_ash()>0)&&Controller_ForestArea.isC_develop()==true){
-                System.out.println("CA PASSE ");
                 Controller_ForestArea.setStatut(4);
             }
         
