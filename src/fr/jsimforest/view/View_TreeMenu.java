@@ -131,7 +131,7 @@ public class View_TreeMenu extends JPanel {
             }
         });
                 
-        this.Check_ContinueDev = new JCheckBox("Continue development", null, false);
+        this.Check_ContinueDev = new JCheckBox("Continue dev", null, false);
         this.Check_ContinueDev.setPreferredSize(new Dimension(130,30));
         this.Check_ContinueDev.addActionListener(new ActionListener() {
           @Override
@@ -226,7 +226,7 @@ public class View_TreeMenu extends JPanel {
         
         JPanel Fieldset_pref = new JPanel();
         Fieldset_pref.setBorder(BorderFactory.createTitledBorder("PREFERENCES"));
-        Fieldset_pref.setPreferredSize(new Dimension(145,200));
+        Fieldset_pref.setPreferredSize(new Dimension(145,240));
         Fieldset_pref.add(this.Check_Border);
         
         
@@ -242,6 +242,7 @@ public class View_TreeMenu extends JPanel {
         jp_step.add(this.Text_maxStep);
         Fieldset_pref.add(jp_step);
         Fieldset_pref.add(this.Check_StepInfinite);
+        Fieldset_pref.add(this.Check_ContinueDev);
         
         this.add(Fieldset_pref);
         

@@ -39,7 +39,7 @@ public class Controller_ForestArea {
         
     public Controller_ForestArea() {
         
-        Controller_ForestArea.c_develop = true;
+        Controller_ForestArea.c_develop = false;
         Controller_ForestArea.statut = 1;
         Controller_ForestArea.name = "Default Forest";
         Controller_ForestArea.step = 0;
